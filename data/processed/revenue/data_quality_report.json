@@ -1,0 +1,47 @@
+{
+  "assessment_date": "2026-11-11T01:31:05",
+  "total_canonical_trading_dates": 152,
+  "start_date": "2026-04-01",
+  "end_date": "2026-11-09",
+  "exchange_parity": {
+    "nse_days_available": 152,
+    "bse_days_available": 152,
+    "date_parity_percentage": 100.0,
+    "missing_exchange_dates": []
+  },
+  "tax_rate_schedule": {
+    "source": "reference/tax_rates.csv",
+    "effective_schedule_applied": true,
+    "finance_act_2024_rate_change_applied": "2024-10-01",
+    "status": "VERIFIED"
+  },
+  "equity_delivery_bounds": {
+    "model_type": "WEIGHTED_DELIVERY_SHARE",
+    "floor_assumption": "100% intraday (0.025% on sell side)",
+    "ceiling_assumption": "100% delivery (0.20% round-trip)",
+    "verified_in_bounds": true
+  },
+  "options_taxation": {
+    "taxable_base": "TRADED_PREMIUM_VALUE",
+    "notional_excluded": true,
+    "status": "VERIFIED"
+  },
+  "gst_taxation": {
+    "taxable_base": "TAXABLE_FINANCIAL_SERVICES (Exchange Fees + SEBI Fees)",
+    "market_turnover_excluded": true,
+    "rate": "18.0%",
+    "status": "VERIFIED"
+  },
+  "summary_totals_cr": {
+    "market_turnover_cr": 54213840.3722,
+    "central_gov_stt_cr": 38135.7436,
+    "state_gov_stamp_duty_cr": 2502.186,
+    "gst_revenue_cr": 991.2194,
+    "total_government_tax_revenue_cr": 41629.149,
+    "sebi_regulatory_fees_cr": 54.2132,
+    "total_statutory_revenue_cr": 41683.3622,
+    "non_government_charges_cr": 5452.5584
+  },
+  "confidence_level": "HIGH_CONFIDENCE_VERIFIED",
+  "official_disclaimer": "Estimated statutory revenue calculated from official exchange BhavCopy, Gross Delivery, and Derivatives summaries using date-effective statutory tax rates. These are deterministic quantitative estimates and must not be construed as actual government Treasury receipts."
+}

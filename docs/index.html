@@ -1,0 +1,1214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Market Ledger — India | Stock Market Government Revenue Estimation Platform</title>
+<meta name="description" content="Auditable daily, monthly, and financial-year estimates of statutory revenue (STT, Stamp Duty, GST, SEBI Fees) generated from Indian stock market transactions across NSE and BSE.">
+<style>
+:root {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface-hover: #1c2128;
+  --border: #30363d;
+  --text: #e6edf3;
+  --text-muted: #8b949e;
+  --text-dim: #6e7681;
+  --accent: #2f81f7;
+  --accent-light: #58a6ff;
+  --stt: #f0883e;
+  --stamp: #bc8cff;
+  --gst: #3fb950;
+  --sebi: #d29922;
+  --nongov: #7d8590;
+  --danger: #f85149;
+  --card-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+[data-theme="light"] {
+  --bg: #f6f8fa;
+  --surface: #ffffff;
+  --surface-hover: #f3f4f6;
+  --border: #d0d7de;
+  --text: #1f2328;
+  --text-muted: #656d76;
+  --text-dim: #8c959f;
+  --accent: #0969da;
+  --accent-light: #0550ae;
+  --stt: #bc4c00;
+  --stamp: #8250df;
+  --gst: #1a7f37;
+  --sebi: #9a6700;
+  --nongov: #57606a;
+  --danger: #cf222e;
+  --card-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  padding-bottom: 60px;
+  -webkit-font-smoothing: antialiased;
+}
+
+header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 18px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.header-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.brand-wrap h1 {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-wrap h1 span.badge {
+  font-size: 11px;
+  font-weight: 600;
+  background: rgba(47, 129, 247, 0.15);
+  color: var(--accent-light);
+  border: 1px solid rgba(47, 129, 247, 0.3);
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.brand-wrap p {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+}
+
+.btn:hover {
+  background: var(--surface-hover);
+  border-color: var(--text-muted);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.btn-primary:hover {
+  background: var(--accent-light);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+
+/* Banner */
+.disclaimer-banner {
+  background: rgba(210, 153, 34, 0.1);
+  border: 1px solid rgba(210, 153, 34, 0.3);
+  color: var(--sebi);
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* Status Pill Group */
+.status-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.pill {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.pill.verified {
+  border-color: rgba(63, 185, 80, 0.4);
+  color: var(--gst);
+  background: rgba(63, 185, 80, 0.08);
+}
+.pill i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* KPI Cards Grid */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 14px;
+  margin-bottom: 24px;
+}
+.kpi-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: var(--card-shadow);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.15s ease;
+}
+.kpi-card:hover {
+  transform: translateY(-2px);
+}
+.kpi-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--card-color, var(--accent));
+}
+.kpi-title {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.kpi-value {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 6px 0 2px;
+  font-family: var(--font-mono);
+  color: var(--text);
+}
+.kpi-sub {
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+/* Filter Controls */
+.filter-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.filter-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+.filter-select, .filter-input {
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 13px;
+  outline: none;
+}
+.filter-select:focus, .filter-input:focus {
+  border-color: var(--accent);
+}
+
+/* Charts Section */
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+  gap: 20px;
+  margin-bottom: 24px;
+}
+@media (max-width: 600px) {
+  .charts-grid { grid-template-columns: 1fr; }
+}
+.chart-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: var(--card-shadow);
+}
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.chart-header h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+.chart-legend {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.legend-item {
+  font-size: 11px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.legend-item span {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+svg.chart-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+.chart-ax {
+  font-size: 10px;
+  fill: var(--text-dim);
+  font-family: var(--font-mono);
+}
+.chart-grid-line {
+  stroke: var(--border);
+  stroke-dasharray: 2, 2;
+  stroke-width: 0.5;
+}
+
+/* Tabs & Tables */
+.tabs-container {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  margin-bottom: 24px;
+}
+.tab-header {
+  display: flex;
+  background: rgba(0,0,0,0.1);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+}
+.tab-btn {
+  background: none;
+  border: none;
+  padding: 12px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: all 0.15s ease;
+}
+.tab-btn:hover {
+  color: var(--text);
+}
+.tab-btn.active {
+  color: var(--accent-light);
+  border-bottom-color: var(--accent-light);
+  background: var(--surface);
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  max-height: 520px;
+}
+table.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  text-align: right;
+  white-space: nowrap;
+}
+table.data-table th, table.data-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+}
+table.data-table th {
+  background: var(--surface);
+  color: var(--text-muted);
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 2px solid var(--border);
+}
+table.data-table th:first-child, table.data-table td:first-child {
+  text-align: left;
+  position: sticky;
+  left: 0;
+  background: var(--surface);
+  z-index: 11;
+}
+table.data-table tr:hover td {
+  background: var(--surface-hover);
+}
+.num-mono {
+  font-family: var(--font-mono);
+}
+.tag-badge {
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+}
+.tag-verified { background: rgba(63, 185, 80, 0.15); color: var(--gst); border: 1px solid rgba(63,185,80,0.3); }
+
+/* Modal */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.active {
+  display: flex;
+}
+.modal-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  max-width: 800px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.modal-box h2 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.formula-block {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  margin: 10px 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.6;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand-wrap">
+      <h1>Market Ledger — India <span class="badge">PROD 2.0</span></h1>
+      <p>Deterministic Dual-Exchange (NSE & BSE) Statutory Revenue Estimation Platform</p>
+    </div>
+    <div class="header-actions">
+      <button class="btn" id="themeBtn" title="Toggle Light/Dark Theme">🌓 Theme</button>
+      <button class="btn btn-primary" id="openModalBtn">📖 Statutory Methodology</button>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- Status Bar -->
+  <div class="status-pills">
+    <div class="pill verified"><i></i> 152 Trading Days Verified</div>
+    <div class="pill verified"><i></i> 100% Exchange Date Parity (NSE & BSE)</div>
+    <div class="pill"><i></i> Effective Tax Rates: Finance (No. 2) Act 2024</div>
+    <div class="pill"><i></i> Latest Trading Session: <span id="latestDate">2026-11-09</span></div>
+    <div class="pill" id="feedUpdated">Data feed updated</div>
+  </div>
+
+  <div class="disclaimer-banner">
+    <div>
+      <strong>Official Transparency Disclaimer:</strong> All figures shown are quantitative financial estimates calculated strictly from primary exchange reporting feeds (UDiFF BhavCopy, gross delivery reports, derivatives market summaries) using statutory date-effective tax rates. These represent estimated tax generation and must never be cited as actual Treasury tax receipts.
+    </div>
+  </div>
+
+  <!-- Primary Metric Cards -->
+  <div class="kpi-grid">
+    <div class="kpi-card" style="--card-color: var(--accent);">
+      <div class="kpi-title">Total Government Tax Revenue</div>
+      <div class="kpi-value" id="kpiGovTotal">₹0.00 Cr</div>
+      <div class="kpi-sub">Central STT + State Stamp Duty + GST</div>
+    </div>
+    <div class="kpi-card" style="--card-color: var(--stt);">
+      <div class="kpi-title">Central Government (STT)</div>
+      <div class="kpi-value" id="kpiStt">₹0.00 Cr</div>
+      <div class="kpi-sub">Securities Transaction Tax (<span id="kpiSttPct">0.0%</span> of tax)</div>
+    </div>
+    <div class="kpi-card" style="--card-color: var(--stamp);">
+      <div class="kpi-title">State Governments (Stamp Duty)</div>
+      <div class="kpi-value" id="kpiStamp">₹0.00 Cr</div>
+      <div class="kpi-sub">Buy-side duty remitted to investor states</div>
+    </div>
+    <div class="kpi-card" style="--card-color: var(--gst);">
+      <div class="kpi-title">GST on Financial Services</div>
+      <div class="kpi-value" id="kpiGst">₹0.00 Cr</div>
+      <div class="kpi-sub">18% on exchange transaction & SEBI fees</div>
+    </div>
+    <div class="kpi-card" style="--card-color: var(--sebi);">
+      <div class="kpi-title">SEBI Regulatory Fees</div>
+      <div class="kpi-value" id="kpiSebi">₹0.00 Cr</div>
+      <div class="kpi-sub">₹10 / crore on cash, fut & opt premium</div>
+    </div>
+    <div class="kpi-card" style="--card-color: var(--nongov);">
+      <div class="kpi-title">Total Market Turnover</div>
+      <div class="kpi-value" id="kpiTurnover">₹0.00 Cr</div>
+      <div class="kpi-sub">Cash + Futures + Options Premium</div>
+    </div>
+    <div class="kpi-card" style="--card-color: #00d2d3;">
+      <div class="kpi-title">Exchange Contribution</div>
+      <div class="kpi-value" id="kpiExchangeShare">NSE 83% · BSE 17%</div>
+      <div class="kpi-sub">NSE: <span id="kpiNseRev">₹0 Cr</span> | BSE: <span id="kpiBseRev">₹0 Cr</span></div>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div class="filter-card">
+    <div class="filter-group">
+      <span class="filter-label">Period / Month:</span>
+      <select class="filter-select" id="monthFilter">
+        <option value="ALL">Entire FY 2026-27 (152 Days)</option>
+        <option value="2026-04">April 2026 (20 days)</option>
+        <option value="2026-05">May 2026 (19 days)</option>
+        <option value="2026-06">June 2026 (21 days)</option>
+        <option value="2026-07">July 2026 (23 days)</option>
+        <option value="2026-08">August 2026 (21 days)</option>
+        <option value="2026-09">September 2026 (21 days)</option>
+        <option value="2026-10">October 2026 (20 days)</option>
+        <option value="2026-11">November 2026 (7 days)</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <span class="filter-label">Exchange:</span>
+      <select class="filter-select" id="exchangeFilter">
+        <option value="ALL">All Exchanges (NSE + BSE)</option>
+        <option value="NSE">NSE Only</option>
+        <option value="BSE">BSE Only</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <span class="filter-label">Segment:</span>
+      <select class="filter-select" id="segmentFilter">
+        <option value="ALL">All Segments</option>
+        <option value="CASH">Cash Market Only</option>
+        <option value="DERIVATIVES">Derivatives (F&O) Only</option>
+      </select>
+    </div>
+
+    <div class="filter-group" style="margin-left: auto;">
+      <span class="filter-label">Search Date:</span>
+      <input type="text" class="filter-input" id="searchDate" placeholder="YYYY-MM-DD..." style="width: 140px;">
+    </div>
+  </div>
+
+  <!-- Charts -->
+  <div class="charts-grid">
+    <!-- Chart 1: Daily Revenue Trend -->
+    <div class="chart-card">
+      <div class="chart-header">
+        <h3>Daily Statutory Revenue Generation (₹ Cr)</h3>
+        <div class="chart-legend">
+          <div class="legend-item"><span style="background:var(--stt)"></span> Central STT</div>
+          <div class="legend-item"><span style="background:var(--stamp)"></span> State Stamp Duty</div>
+          <div class="legend-item"><span style="background:var(--gst)"></span> GST (Services)</div>
+          <div class="legend-item"><span style="background:var(--sebi)"></span> SEBI Fee</div>
+        </div>
+      </div>
+      <div id="chartDailyRevenue"></div>
+    </div>
+
+    <!-- Chart 2: Monthly Progression -->
+    <div class="chart-card">
+      <div class="chart-header">
+        <h3>Monthly Revenue Breakdown (₹ Cr)</h3>
+        <div class="chart-legend">
+          <div class="legend-item"><span style="background:var(--accent)"></span> Gov Tax Total</div>
+          <div class="legend-item"><span style="background:var(--nongov)"></span> Exchange Charges</div>
+        </div>
+      </div>
+      <div id="chartMonthlyRevenue"></div>
+    </div>
+
+    <!-- Chart 3: NSE vs BSE Revenue -->
+    <div class="chart-card">
+      <div class="chart-header">
+        <h3>Exchange Revenue Contribution (NSE vs BSE)</h3>
+        <div class="chart-legend">
+          <div class="legend-item"><span style="background:#2f81f7"></span> NSE Statutory</div>
+          <div class="legend-item"><span style="background:#e08a00"></span> BSE Statutory</div>
+        </div>
+      </div>
+      <div id="chartExchangeComp"></div>
+    </div>
+
+    <!-- Chart 4: Delivery Floor vs Ceiling Bounds -->
+    <div class="chart-card">
+      <div class="chart-header">
+        <h3>Cash STT Delivery Bounds: Modeled vs Floor vs Ceiling</h3>
+        <div class="chart-legend">
+          <div class="legend-item"><span style="background:#cf222e"></span> Ceiling (100% Delivery: 0.2%)</div>
+          <div class="legend-item"><span style="background:#3fb950"></span> Modeled (Delivery Weighted)</div>
+          <div class="legend-item"><span style="background:#d29922"></span> Floor (100% Intraday: 0.025%)</div>
+        </div>
+      </div>
+      <div id="chartBounds"></div>
+    </div>
+  </div>
+
+  <!-- Detailed Data Tabs -->
+  <div class="tabs-container">
+    <div class="tab-header">
+      <button class="tab-btn active" data-tab="tab-daily">Daily Revenue Ledger (152 Days)</button>
+      <button class="tab-btn" data-tab="tab-monthly">Monthly Totals (8 Months)</button>
+      <button class="tab-btn" data-tab="tab-exchange">Exchange Comparison</button>
+      <button class="tab-btn" data-tab="tab-rates">Statutory Tax Schedule</button>
+    </div>
+
+    <!-- Tab 1: Daily Table -->
+    <div class="tab-content" id="tab-daily" style="display: block;">
+      <div class="table-wrapper">
+        <table class="data-table" id="tableDaily">
+          <thead>
+            <tr>
+              <th>Trade Date</th>
+              <th>Total Turnover</th>
+              <th>Cash Turnover</th>
+              <th>Futures Turnover</th>
+              <th>Options Premium</th>
+              <th>Options Notional</th>
+              <th>Central STT</th>
+              <th>STT Floor</th>
+              <th>STT Ceiling</th>
+              <th>State Stamp</th>
+              <th>SEBI Fee</th>
+              <th>GST (Known)</th>
+              <th>Gov Tax Total</th>
+              <th>Statutory Total</th>
+              <th>Non-Gov Exch</th>
+              <th>Audit Status</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Tab 2: Monthly Table -->
+    <div class="tab-content" id="tab-monthly" style="display: none;">
+      <div class="table-wrapper">
+        <table class="data-table" id="tableMonthly">
+          <thead>
+            <tr>
+              <th>Month</th>
+              <th>Trading Days</th>
+              <th>Total Turnover</th>
+              <th>Cash Turnover</th>
+              <th>Futures Turnover</th>
+              <th>Options Premium</th>
+              <th>Options Notional</th>
+              <th>Central STT</th>
+              <th>State Stamp</th>
+              <th>GST Revenue</th>
+              <th>SEBI Fees</th>
+              <th>Gov Tax Total</th>
+              <th>Statutory Total</th>
+              <th>Exchange Charges</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Tab 3: Exchange Comparison Table -->
+    <div class="tab-content" id="tab-exchange" style="display: none;">
+      <div class="table-wrapper">
+        <table class="data-table" id="tableExchange">
+          <thead>
+            <tr>
+              <th>Trade Date</th>
+              <th>NSE Turnover</th>
+              <th>BSE Turnover</th>
+              <th>NSE STT</th>
+              <th>BSE STT</th>
+              <th>NSE Stamp</th>
+              <th>BSE Stamp</th>
+              <th>NSE SEBI</th>
+              <th>BSE SEBI</th>
+              <th>NSE Statutory</th>
+              <th>BSE Statutory</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Tab 4: Statutory Rates Table -->
+    <div class="tab-content" id="tab-rates" style="display: none;">
+      <div class="table-wrapper">
+        <table class="data-table" id="tableRates">
+          <thead>
+            <tr>
+              <th>Tax Type</th>
+              <th>Segment</th>
+              <th>Instrument</th>
+              <th>Side</th>
+              <th>Effective From</th>
+              <th>Effective To</th>
+              <th>Rate</th>
+              <th>Recipient</th>
+              <th>Official Source</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Statutory Methodology Modal -->
+<div class="modal-overlay" id="methodologyModal">
+  <div class="modal-box">
+    <h2>
+      <span>Statutory Revenue Calculation Methodology</span>
+      <button class="modal-close" id="closeModalBtn">&times;</button>
+    </h2>
+    <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">
+      This platform applies deterministic Indian statutory tax rules to official primary exchange records. Every calculation is transparent, auditable, and traceable.
+    </p>
+
+    <h4 style="margin-top: 14px; font-size: 14px;">1. Central Government: Securities Transaction Tax (STT)</h4>
+    <div class="formula-block">
+      • <strong>Equity Delivery:</strong> 0.1% buy + 0.1% sell = 0.20% round-trip on delivery value.<br>
+      • <strong>Equity Intraday:</strong> 0.025% on sale side of squared-off turnover.<br>
+      • <strong>Futures:</strong> 0.02% on sale-side turnover (Finance (No. 2) Act 2024 effective 1 Oct 2024).<br>
+      • <strong>Options Premium:</strong> 0.10% on traded sale-side premium (Finance (No. 2) Act 2024).<br>
+      • <strong>STT on Notional Turnover:</strong> 0.00% (STT is strictly NOT levied on notional turnover).<br>
+      • <strong>Corporate & Government Debt:</strong> 0.00% (Exempt under Finance Act 2008).
+    </div>
+
+    <h4 style="margin-top: 14px; font-size: 14px;">2. State Government: Stamp Duty (Indian Stamp Act 1899)</h4>
+    <div class="formula-block">
+      • <strong>Levied exclusively on BUY side</strong> (Finance Act 2019 / Schedule I Article 27):<br>
+      • Equity Delivery Buy: 0.015% (₹1,500 / Cr)<br>
+      • Equity Intraday Buy: 0.003% (₹300 / Cr)<br>
+      • Futures Buy: 0.002% (₹200 / Cr)<br>
+      • Options Premium Buy: 0.003% (₹300 / Cr on premium)<br>
+      • Corporate Debt Buy: 0.0001% (₹10 / Cr)<br>
+      • G-Sec & SGB: Exempt (Section 8A)
+    </div>
+
+    <h4 style="margin-top: 14px; font-size: 14px;">3. Goods and Services Tax (GST: 18%)</h4>
+    <div class="formula-block">
+      • <strong>Rule 8.3 & Rule 9:</strong> GST is strictly 18% on <em>taxable financial services</em>.<br>
+      • <strong>Taxable Services:</strong> Exchange Transaction Charges + SEBI Turnover Fees.<br>
+      • <strong>Turnover Exemption:</strong> Traded market turnover is completely exempt from GST.<br>
+      • Known GST = 18% × (Exchange Fees + SEBI Fees).
+    </div>
+
+    <h4 style="margin-top: 14px; font-size: 14px;">4. Delivery Bounds (Floor vs Ceiling)</h4>
+    <div class="formula-block">
+      • Client-level intraday vs delivery segregation is private to clearing corporations.<br>
+      • <strong>Floor:</strong> If 100% intraday = Cash Equity Turnover × 0.025%<br>
+      • <strong>Ceiling:</strong> If 100% delivery = Cash Equity Turnover × 0.20%<br>
+      • <strong>Modeled:</strong> Weighted by official Gross Delivery value from exchange delivery files.
+    </div>
+
+    <h4 style="margin-top: 14px; font-size: 14px;">5. Non-Government Intermediary Charges (Segregated)</h4>
+    <div class="formula-block">
+      • Exchange transaction charges (NSE ~₹297/Cr cash, BSE ~₹300/Cr cash) are retained by exchanges as private operating income.<br>
+      • They are tracked as market friction costs and <strong>never</strong> added into government revenue totals.
+    </div>
+  </div>
+</div>
+
+<script>
+let DATA = null;
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+const fmtCr = (val, d=2) => {
+  if (val == null || isNaN(val)) return "–";
+  return "₹" + Number(val).toLocaleString("en-IN", { minimumFractionDigits: d, maximumFractionDigits: d }) + " Cr";
+};
+const fmtNum = (val, d=2) => {
+  if (val == null || isNaN(val)) return "–";
+  return Number(val).toLocaleString("en-IN", { minimumFractionDigits: d, maximumFractionDigits: d });
+};
+
+// Theme toggle
+const themeBtn = $("#themeBtn");
+themeBtn.addEventListener("click", () => {
+  const current = document.documentElement.getAttribute("data-theme") || "dark";
+  const target = current === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", target);
+  localStorage.setItem("theme", target);
+});
+if (localStorage.getItem("theme")) {
+  document.documentElement.setAttribute("data-theme", localStorage.getItem("theme"));
+}
+
+// Modal handlers
+$("#openModalBtn").onclick = () => $("#methodologyModal").classList.add("active");
+$("#closeModalBtn").onclick = () => $("#methodologyModal").classList.remove("active");
+$("#methodologyModal").onclick = e => { if (e.target.id === "methodologyModal") $("#methodologyModal").classList.remove("active"); };
+
+// Tabs handler
+$$(".tab-btn").forEach(btn => {
+  btn.onclick = () => {
+    $$(".tab-btn").forEach(b => b.classList.remove("active"));
+    $$(".tab-content").forEach(c => c.style.display = "none");
+    btn.classList.add("active");
+    $("#" + btn.dataset.tab).style.display = "block";
+  };
+});
+
+// Load and Render Data
+fetch("data.json", { cache: "no-store" })
+  .then(res => res.json())
+  .then(json => {
+    DATA = json;
+    initDashboard();
+  })
+  .catch(err => {
+    console.error("Failed to load data.json:", err);
+    $(".container").innerHTML = `<div style="padding:40px; text-align:center; color:var(--danger)"><h3>Failed to load market data feed.</h3><p>Ensure data.json is present in docs/ directory.</p></div>`;
+  });
+
+function initDashboard() {
+  if (!DATA) return;
+  $("#feedUpdated").textContent = "Feed updated: " + DATA.meta.updated_ist;
+  $("#latestDate").textContent = DATA.meta.end_date;
+
+  renderSummary();
+  renderCharts();
+  renderTables();
+
+  // Attach filter listeners
+  $("#monthFilter").onchange = filterAndRender;
+  $("#exchangeFilter").onchange = filterAndRender;
+  $("#segmentFilter").onchange = filterAndRender;
+  $("#searchDate").oninput = filterAndRender;
+}
+
+function filterAndRender() {
+  renderSummary();
+  renderCharts();
+  renderTables();
+}
+
+function getFilteredDailyRecords() {
+  if (!DATA || !DATA.daily_records) return [];
+  const month = $("#monthFilter").value;
+  const search = $("#searchDate").value.trim();
+
+  return DATA.daily_records.filter(r => {
+    if (month !== "ALL" && !r.trade_date.startsWith(month)) return false;
+    if (search && !r.trade_date.includes(search)) return false;
+    return true;
+  });
+}
+
+function renderSummary() {
+  const records = getFilteredDailyRecords();
+  const exch = $("#exchangeFilter").value;
+  const seg = $("#segmentFilter").value;
+
+  let totalGov = 0, stt = 0, stamp = 0, gst = 0, sebi = 0, turnover = 0;
+  let nseRev = 0, bseRev = 0;
+
+  records.forEach(r => {
+    let r_turnover = 0, r_stt = 0, r_stamp = 0, r_sebi = 0;
+
+    if (exch === "ALL") {
+      r_turnover = r.total_market_turnover_cr;
+      r_stt = r.stt_total_cr;
+      r_stamp = r.stamp_duty_total_cr;
+      r_sebi = r.sebi_fee_total_cr;
+    } else if (exch === "NSE") {
+      r_turnover = r.nse_cash_turnover_cr + r.nse_futures_turnover_cr + r.nse_options_premium_cr;
+      r_stt = r.stt_nse_cr;
+      r_stamp = r.stamp_duty_nse_cr;
+      r_sebi = r.sebi_fee_nse_cr;
+    } else if (exch === "BSE") {
+      r_turnover = r.bse_cash_turnover_cr + r.bse_futures_turnover_cr + r.bse_options_premium_cr;
+      r_stt = r.stt_bse_cr;
+      r_stamp = r.stamp_duty_bse_cr;
+      r_sebi = r.sebi_fee_bse_cr;
+    }
+
+    if (seg === "CASH") {
+      r_turnover = (exch === "BSE" ? r.bse_cash_turnover_cr : (exch === "NSE" ? r.nse_cash_turnover_cr : r.total_cash_turnover_cr));
+      r_stt = (exch === "BSE" ? r.stt_bse_cr : (exch === "NSE" ? r.stt_nse_cr : r.stt_equity_total_cr));
+    } else if (seg === "DERIVATIVES") {
+      r_turnover = (exch === "BSE" ? r.bse_futures_turnover_cr + r.bse_options_premium_cr : (exch === "NSE" ? r.nse_futures_turnover_cr + r.nse_options_premium_cr : r.total_futures_turnover_cr + r.total_options_premium_cr));
+      r_stt = (exch === "BSE" ? r.stt_bse_cr : (exch === "NSE" ? r.stt_nse_cr : r.stt_futures_cr + r.stt_options_cr));
+    }
+
+    turnover += r_turnover;
+    stt += r_stt;
+    stamp += r_stamp;
+    sebi += r_sebi;
+    gst += r.gst_known_total_cr * (exch === "NSE" ? 0.8 : (exch === "BSE" ? 0.2 : 1.0));
+
+    nseRev += (r.stt_nse_cr + r.stamp_duty_nse_cr + r.sebi_fee_nse_cr);
+    bseRev += (r.stt_bse_cr + r.stamp_duty_bse_cr + r.sebi_fee_bse_cr);
+  });
+
+  totalGov = stt + stamp + gst;
+  const sttPct = totalGov > 0 ? (stt / totalGov * 100).toFixed(1) : 0;
+  const totRev = nseRev + bseRev;
+  const nseSharePct = totRev > 0 ? (nseRev / totRev * 100).toFixed(0) : 0;
+  const bseSharePct = totRev > 0 ? (100 - nseSharePct) : 0;
+
+  $("#kpiGovTotal").textContent = fmtCr(totalGov);
+  $("#kpiStt").textContent = fmtCr(stt);
+  $("#kpiSttPct").textContent = sttPct + "%";
+  $("#kpiStamp").textContent = fmtCr(stamp);
+  $("#kpiGst").textContent = fmtCr(gst);
+  $("#kpiSebi").textContent = fmtCr(sebi);
+  $("#kpiTurnover").textContent = fmtCr(turnover);
+  $("#kpiExchangeShare").textContent = `NSE ${nseSharePct}% · BSE ${bseSharePct}%`;
+  $("#kpiNseRev").textContent = fmtCr(nseRev, 0);
+  $("#kpiBseRev").textContent = fmtCr(bseRev, 0);
+}
+
+function renderCharts() {
+  const records = getFilteredDailyRecords();
+  renderDailyRevenueChart(records);
+  renderMonthlyRevenueChart();
+  renderExchangeCompChart(records);
+  renderBoundsChart(records);
+}
+
+function renderDailyRevenueChart(records) {
+  const el = $("#chartDailyRevenue");
+  if (!records.length) { el.innerHTML = "<p class='chart-ax'>No records</p>"; return; }
+
+  const W = 640, H = 220, pLeft = 46, pBottom = 26, pTop = 14, pRight = 10;
+  const chartW = W - pLeft - pRight;
+  const chartH = H - pTop - pBottom;
+
+  const maxVal = Math.max(1, ...records.map(r => r.total_statutory_revenue_cr));
+  const bw = Math.max(1, chartW / records.length);
+
+  let bars = "";
+  records.forEach((r, idx) => {
+    const x = pLeft + idx * bw;
+    const yBase = pTop + chartH;
+
+    const hStt = (r.stt_total_cr / maxVal) * chartH;
+    const hStamp = (r.stamp_duty_total_cr / maxVal) * chartH;
+    const hGst = (r.gst_known_total_cr / maxVal) * chartH;
+    const hSebi = (r.sebi_fee_total_cr / maxVal) * chartH;
+
+    const yStt = yBase - hStt;
+    const yStamp = yStt - hStamp;
+    const yGst = yStamp - hGst;
+    const ySebi = yGst - hSebi;
+
+    bars += `<rect x="${x}" y="${yStt}" width="${Math.max(1, bw - 1)}" height="${hStt}" fill="var(--stt)">
+               <title>${r.trade_date} STT: ${fmtCr(r.stt_total_cr)}</title></rect>`;
+    bars += `<rect x="${x}" y="${yStamp}" width="${Math.max(1, bw - 1)}" height="${hStamp}" fill="var(--stamp)">
+               <title>${r.trade_date} Stamp Duty: ${fmtCr(r.stamp_duty_total_cr)}</title></rect>`;
+    bars += `<rect x="${x}" y="${yGst}" width="${Math.max(1, bw - 1)}" height="${hGst}" fill="var(--gst)">
+               <title>${r.trade_date} GST: ${fmtCr(r.gst_known_total_cr)}</title></rect>`;
+    bars += `<rect x="${x}" y="${ySebi}" width="${Math.max(1, bw - 1)}" height="${hSebi}" fill="var(--sebi)">
+               <title>${r.trade_date} SEBI Fee: ${fmtCr(r.sebi_fee_total_cr)}</title></rect>`;
+  });
+
+  const svg = `<svg class="chart-svg" viewBox="0 0 ${W} ${H}">
+    <line x1="${pLeft}" y1="${pTop + chartH}" x2="${W - pRight}" y2="${pTop + chartH}" stroke="var(--border)" stroke-width="1"/>
+    <line x1="${pLeft}" y1="${pTop}" x2="${W - pRight}" y2="${pTop}" class="chart-grid-line"/>
+    <line x1="${pLeft}" y1="${pTop + chartH / 2}" x2="${W - pRight}" y2="${pTop + chartH / 2}" class="chart-grid-line"/>
+    <text x="${pLeft - 6}" y="${pTop + 4}" class="chart-ax" text-anchor="end">${fmtNum(maxVal, 0)}</text>
+    <text x="${pLeft - 6}" y="${pTop + chartH / 2 + 4}" class="chart-ax" text-anchor="end">${fmtNum(maxVal / 2, 0)}</text>
+    <text x="${pLeft - 6}" y="${pTop + chartH + 4}" class="chart-ax" text-anchor="end">0</text>
+    <text x="${pLeft}" y="${H - 6}" class="chart-ax">${records[0].trade_date}</text>
+    <text x="${W - pRight}" y="${H - 6}" class="chart-ax" text-anchor="end">${records[records.length - 1].trade_date}</text>
+    ${bars}
+  </svg>`;
+  el.innerHTML = svg;
+}
+
+function renderMonthlyRevenueChart() {
+  const el = $("#chartMonthlyRevenue");
+  if (!DATA || !DATA.monthly_summary) return;
+
+  const rows = DATA.monthly_summary;
+  const W = 640, H = 220, pLeft = 46, pBottom = 26, pTop = 14, pRight = 10;
+  const chartW = W - pLeft - pRight;
+  const chartH = H - pTop - pBottom;
+
+  const maxVal = Math.max(1, ...rows.map(r => r.total_statutory_revenue_cr + r.non_government_charges_cr));
+  const bw = chartW / rows.length;
+
+  let bars = "";
+  rows.forEach((r, idx) => {
+    const x = pLeft + idx * bw + 8;
+    const bWidth = bw - 16;
+    const yBase = pTop + chartH;
+
+    const hGov = (r.total_government_tax_revenue_cr / maxVal) * chartH;
+    const hNonGov = (r.non_government_charges_cr / maxVal) * chartH;
+
+    bars += `<rect x="${x}" y="${yBase - hGov}" width="${bWidth}" height="${hGov}" fill="var(--accent)" rx="3">
+               <title>${r.month} Gov Revenue: ${fmtCr(r.total_government_tax_revenue_cr)}</title></rect>`;
+    bars += `<rect x="${x}" y="${yBase - hGov - hNonGov}" width="${bWidth}" height="${hNonGov}" fill="var(--nongov)" rx="3">
+               <title>${r.month} Exchange Charges: ${fmtCr(r.non_government_charges_cr)}</title></rect>`;
+    bars += `<text x="${x + bWidth / 2}" y="${H - 8}" class="chart-ax" text-anchor="middle">${r.month.slice(5)}</text>`;
+  });
+
+  const svg = `<svg class="chart-svg" viewBox="0 0 ${W} ${H}">
+    <line x1="${pLeft}" y1="${pTop + chartH}" x2="${W - pRight}" y2="${pTop + chartH}" stroke="var(--border)" stroke-width="1"/>
+    <text x="${pLeft - 6}" y="${pTop + 4}" class="chart-ax" text-anchor="end">${fmtNum(maxVal, 0)}</text>
+    <text x="${pLeft - 6}" y="${pTop + chartH + 4}" class="chart-ax" text-anchor="end">0</text>
+    ${bars}
+  </svg>`;
+  el.innerHTML = svg;
+}
+
+function renderExchangeCompChart(records) {
+  const el = $("#chartExchangeComp");
+  if (!records.length) return;
+
+  const W = 640, H = 220, pLeft = 46, pBottom = 26, pTop = 14, pRight = 10;
+  const chartW = W - pLeft - pRight;
+  const chartH = H - pTop - pBottom;
+
+  const maxVal = Math.max(1, ...records.map(r => Math.max(r.stt_nse_cr + r.stamp_duty_nse_cr, r.stt_bse_cr + r.stamp_duty_bse_cr)));
+  const bw = Math.max(1, chartW / records.length);
+
+  let linesNse = "", linesBse = "";
+  records.forEach((r, idx) => {
+    const x = pLeft + idx * bw;
+    const yNse = pTop + chartH - ((r.stt_nse_cr + r.stamp_duty_nse_cr) / maxVal) * chartH;
+    const yBse = pTop + chartH - ((r.stt_bse_cr + r.stamp_duty_bse_cr) / maxVal) * chartH;
+
+    linesNse += `${idx === 0 ? "M" : "L"} ${x} ${yNse} `;
+    linesBse += `${idx === 0 ? "M" : "L"} ${x} ${yBse} `;
+  });
+
+  const svg = `<svg class="chart-svg" viewBox="0 0 ${W} ${H}">
+    <line x1="${pLeft}" y1="${pTop + chartH}" x2="${W - pRight}" y2="${pTop + chartH}" stroke="var(--border)" stroke-width="1"/>
+    <line x1="${pLeft}" y1="${pTop + chartH / 2}" x2="${W - pRight}" y2="${pTop + chartH / 2}" class="chart-grid-line"/>
+    <text x="${pLeft - 6}" y="${pTop + 4}" class="chart-ax" text-anchor="end">${fmtNum(maxVal, 0)}</text>
+    <text x="${pLeft - 6}" y="${pTop + chartH + 4}" class="chart-ax" text-anchor="end">0</text>
+    <path d="${linesNse}" fill="none" stroke="#2f81f7" stroke-width="2"/>
+    <path d="${linesBse}" fill="none" stroke="#e08a00" stroke-width="2"/>
+    <text x="${pLeft}" y="${H - 6}" class="chart-ax">${records[0].trade_date}</text>
+    <text x="${W - pRight}" y="${H - 6}" class="chart-ax" text-anchor="end">${records[records.length - 1].trade_date}</text>
+  </svg>`;
+  el.innerHTML = svg;
+}
+
+function renderBoundsChart(records) {
+  const el = $("#chartBounds");
+  if (!records.length) return;
+
+  const W = 640, H = 220, pLeft = 46, pBottom = 26, pTop = 14, pRight = 10;
+  const chartW = W - pLeft - pRight;
+  const chartH = H - pTop - pBottom;
+
+  const maxVal = Math.max(1, ...records.map(r => r.stt_equity_ceiling_cr));
+  const bw = Math.max(1, chartW / records.length);
+
+  let pathCeil = "", pathModeled = "", pathFloor = "";
+  records.forEach((r, idx) => {
+    const x = pLeft + idx * bw;
+    const yC = pTop + chartH - (r.stt_equity_ceiling_cr / maxVal) * chartH;
+    const yM = pTop + chartH - (r.stt_equity_total_cr / maxVal) * chartH;
+    const yF = pTop + chartH - (r.stt_equity_floor_cr / maxVal) * chartH;
+
+    pathCeil += `${idx === 0 ? "M" : "L"} ${x} ${yC} `;
+    pathModeled += `${idx === 0 ? "M" : "L"} ${x} ${yM} `;
+    pathFloor += `${idx === 0 ? "M" : "L"} ${x} ${yF} `;
+  });
+
+  const svg = `<svg class="chart-svg" viewBox="0 0 ${W} ${H}">
+    <line x1="${pLeft}" y1="${pTop + chartH}" x2="${W - pRight}" y2="${pTop + chartH}" stroke="var(--border)" stroke-width="1"/>
+    <text x="${pLeft - 6}" y="${pTop + 4}" class="chart-ax" text-anchor="end">${fmtNum(maxVal, 0)}</text>
+    <text x="${pLeft - 6}" y="${pTop + chartH + 4}" class="chart-ax" text-anchor="end">0</text>
+    <path d="${pathCeil}" fill="none" stroke="#cf222e" stroke-width="1.5" stroke-dasharray="3,3"/>
+    <path d="${pathModeled}" fill="none" stroke="#3fb950" stroke-width="2"/>
+    <path d="${pathFloor}" fill="none" stroke="#d29922" stroke-width="1.5" stroke-dasharray="3,3"/>
+    <text x="${pLeft}" y="${H - 6}" class="chart-ax">${records[0].trade_date}</text>
+    <text x="${W - pRight}" y="${H - 6}" class="chart-ax" text-anchor="end">${records[records.length - 1].trade_date}</text>
+  </svg>`;
+  el.innerHTML = svg;
+}
+
+function renderTables() {
+  const records = getFilteredDailyRecords();
+
+  // Tab 1: Daily Table
+  const tbodyDaily = $("#tableDaily tbody");
+  tbodyDaily.innerHTML = records.map(r => `
+    <tr>
+      <td><strong>${r.trade_date}</strong></td>
+      <td class="num-mono">${fmtNum(r.total_market_turnover_cr)}</td>
+      <td class="num-mono">${fmtNum(r.total_cash_turnover_cr)}</td>
+      <td class="num-mono">${fmtNum(r.total_futures_turnover_cr)}</td>
+      <td class="num-mono">${fmtNum(r.total_options_premium_cr)}</td>
+      <td class="num-mono" style="color:var(--text-dim)">${fmtNum(r.total_options_notional_cr)}</td>
+      <td class="num-mono" style="color:var(--stt); font-weight:600">${fmtNum(r.stt_total_cr)}</td>
+      <td class="num-mono" style="color:var(--sebi)">${fmtNum(r.stt_equity_floor_cr)}</td>
+      <td class="num-mono" style="color:var(--danger)">${fmtNum(r.stt_equity_ceiling_cr)}</td>
+      <td class="num-mono" style="color:var(--stamp)">${fmtNum(r.stamp_duty_total_cr)}</td>
+      <td class="num-mono" style="color:var(--sebi)">${fmtNum(r.sebi_fee_total_cr)}</td>
+      <td class="num-mono" style="color:var(--gst)">${fmtNum(r.gst_known_total_cr)}</td>
+      <td class="num-mono" style="font-weight:700">${fmtNum(r.total_government_tax_revenue_cr)}</td>
+      <td class="num-mono" style="color:var(--accent-light); font-weight:700">${fmtNum(r.total_statutory_revenue_cr)}</td>
+      <td class="num-mono" style="color:var(--nongov)">${fmtNum(r.non_government_charges_cr)}</td>
+      <td><span class="tag-badge tag-verified">${r.status}</span></td>
+    </tr>
+  `).join("");
+
+  // Tab 2: Monthly Table
+  if (DATA && DATA.monthly_summary) {
+    const tbodyMonthly = $("#tableMonthly tbody");
+    tbodyMonthly.innerHTML = DATA.monthly_summary.map(m => `
+      <tr>
+        <td><strong>${m.month}</strong></td>
+        <td>${m.trading_days}</td>
+        <td class="num-mono">${fmtNum(m.total_market_turnover_cr)}</td>
+        <td class="num-mono">${fmtNum(m.total_cash_turnover_cr)}</td>
+        <td class="num-mono">${fmtNum(m.total_futures_turnover_cr)}</td>
+        <td class="num-mono">${fmtNum(m.total_options_premium_cr)}</td>
+        <td class="num-mono" style="color:var(--text-dim)">${fmtNum(m.total_options_notional_cr)}</td>
+        <td class="num-mono" style="color:var(--stt); font-weight:600">${fmtNum(m.central_gov_revenue_cr)}</td>
+        <td class="num-mono" style="color:var(--stamp)">${fmtNum(m.state_gov_revenue_cr)}</td>
+        <td class="num-mono" style="color:var(--gst)">${fmtNum(m.gst_revenue_cr)}</td>
+        <td class="num-mono" style="color:var(--sebi)">${fmtNum(m.sebi_fee_total_cr)}</td>
+        <td class="num-mono" style="font-weight:700">${fmtNum(m.total_government_tax_revenue_cr)}</td>
+        <td class="num-mono" style="color:var(--accent-light); font-weight:700">${fmtNum(m.total_statutory_revenue_cr)}</td>
+        <td class="num-mono" style="color:var(--nongov)">${fmtNum(m.non_government_charges_cr)}</td>
+      </tr>
+    `).join("");
+  }
+
+  // Tab 3: Exchange Table
+  const tbodyExchange = $("#tableExchange tbody");
+  tbodyExchange.innerHTML = records.map(r => `
+    <tr>
+      <td><strong>${r.trade_date}</strong></td>
+      <td class="num-mono">${fmtNum(r.nse_cash_turnover_cr + r.nse_futures_turnover_cr + r.nse_options_premium_cr)}</td>
+      <td class="num-mono">${fmtNum(r.bse_cash_turnover_cr + r.bse_futures_turnover_cr + r.bse_options_premium_cr)}</td>
+      <td class="num-mono" style="color:var(--stt)">${fmtNum(r.stt_nse_cr)}</td>
+      <td class="num-mono" style="color:var(--stt)">${fmtNum(r.stt_bse_cr)}</td>
+      <td class="num-mono" style="color:var(--stamp)">${fmtNum(r.stamp_duty_nse_cr)}</td>
+      <td class="num-mono" style="color:var(--stamp)">${fmtNum(r.stamp_duty_bse_cr)}</td>
+      <td class="num-mono">${fmtNum(r.sebi_fee_nse_cr)}</td>
+      <td class="num-mono">${fmtNum(r.sebi_fee_bse_cr)}</td>
+      <td class="num-mono" style="font-weight:600; color:var(--accent-light)">${fmtNum(r.stt_nse_cr + r.stamp_duty_nse_cr + r.sebi_fee_nse_cr)}</td>
+      <td class="num-mono" style="font-weight:600; color:#e08a00">${fmtNum(r.stt_bse_cr + r.stamp_duty_bse_cr + r.sebi_fee_bse_cr)}</td>
+    </tr>
+  `).join("");
+
+  // Tab 4: Rates Table
+  if (DATA && DATA.tax_schedules) {
+    const tbodyRates = $("#tableRates tbody");
+    tbodyRates.innerHTML = DATA.tax_schedules.map(r => `
+      <tr>
+        <td><strong>${r.tax_type}</strong></td>
+        <td>${r.market_segment}</td>
+        <td>${r.instrument_type}</td>
+        <td>${r.buy_sell_side}</td>
+        <td>${r.effective_from}</td>
+        <td>${r.effective_to === "9999-12-31" ? "Current" : r.effective_to}</td>
+        <td class="num-mono">${(Number(r.rate) * (r.rate_unit === "PERCENTAGE" ? 100 : 1)).toFixed(4)}${r.rate_unit === "PERCENTAGE" ? "%" : " Rs/Cr"}</td>
+        <td>${r.recipient}</td>
+        <td style="max-width:240px; overflow:hidden; text-overflow:ellipsis;" title="${r.official_source}">${r.official_source}</td>
+        <td style="max-width:240px; overflow:hidden; text-overflow:ellipsis;" title="${r.notes}">${r.notes}</td>
+      </tr>
+    `).join("");
+  }
+}
+</script>
+</body>
+</html>

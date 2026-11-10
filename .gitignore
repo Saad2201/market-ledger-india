@@ -1,0 +1,35 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# Logs
+*.log
+market_ledger_nightly.log
+nightly.log
+
+# Scratch scripts and temporary files
+scratch/
+test_*.txt
+*.bak
+bse_check/
+market-ledger_all_*.csv
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editor directories
+.vscode/
+.idea/

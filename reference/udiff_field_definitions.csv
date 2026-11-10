@@ -1,0 +1,35 @@
+field_name,data_type,format,official_name,unit,sgmt_applicability,official_definition,relevance_to_turnover_and_tax
+TradDt,String,YYYY-MM-DD,Trade Date,Date (ISO),CM/FO,The calendar date on which trading took place.,Primary date index. Must match file date and business date.
+BizDt,String,YYYY-MM-DD,Business Date,Date (ISO),CM/FO,The date for clearing and settlement obligations.,Crucial for verifying special sessions and holiday clearing.
+Sgmt,String,Text (2-4),Market Segment,Code,CM/FO,"Identifier of exchange segment: 'CM' for Capital Market, 'FO' for Futures & Options.",Top-level segmentation for tax application.
+Src,String,Text (3-4),Source Exchange,Code,CM/FO,"Source exchange: 'NSE' or 'BSE'.",Exchange attribution.
+FinInstrmTp,String,Text (3-4),Financial Instrument Type,Code,CM/FO,"Instrument type code: 'STK' for equity cash, 'STO' for stock option, 'IDO' for index option, 'STF' for stock future, 'IDF' for index future.",Determines tax schedule and whether option premium decomposition is required.
+FinInstrmId,String,Text,Financial Instrument ID,Identifier,CM/FO,Internal exchange security or contract identifier.,Unique contract identifier.
+ISIN,String,Text (12),International Securities Identification Number,Identifier,CM/FO,12-character alpha-numeric ISIN (present in CM; blank in FO).,Security tracking and depository reconciliation.
+TckrSymb,String,Text,Ticker Symbol,Symbol,CM/FO,Exchange trading symbol (e.g. RELIANCE, NIFTY).,Underlying mapping and sector analytics.
+SctySrs,String,Text (2),Security Series,Series Code,CM (blank in FO),Exchange series code designating the trading and settlement sub-category (e.g. EQ, BE, SM, GB, GS, IV, RR).,Mandatory for determining equity vs debt vs trust unit tax treatment.
+XpryDt,String,YYYY-MM-DD,Expiry Date,Date (ISO),FO (blank in CM),Contract expiry date.,Derivatives contract classification and monthly expiry clustering.
+FininstrmActlXpryDt,String,YYYY-MM-DD,Actual Expiry Date,Date (ISO),FO (blank in CM),Actual expiration date accounting for holidays.,Settlement alignment.
+StrkPric,Decimal,Decimal (2),Strike Price,Rupees,FO Options (0 for Futures/CM),Agreed exercise price per unit of the underlying.,Key component of notional value: used to decompose premium turnover: PremTurnover = TtlTrfVal - (StrkPric * Vol * Lot).
+OptnTp,String,Text (2),Option Type,Code,FO Options (blank for Futures/CM),"Option type: 'CE' for Call Option (European), 'PE' for Put Option (European).",Option side classification.
+FinInstrmNm,String,Text,Financial Instrument Name,Text,CM/FO,Full legal contract or security title description.,Descriptive confirmation.
+OpnPric,Decimal,Decimal (2-4),Open Price,Rupees,CM/FO,Price of the first executed trade of the session.,Session metrics.
+HghPric,Decimal,Decimal (2-4),High Price,Rupees,CM/FO,Highest execution price during the session.,Session metrics.
+LwPric,Decimal,Decimal (2-4),Low Price,Rupees,CM/FO,Lowest execution price during the session.,Session metrics.
+ClsPric,Decimal,Decimal (2-4),Close Price,Rupees,CM/FO,Closing price determined as 30-minute volume-weighted average price (VWAP) before market close.,Valuation.
+LastPric,Decimal,Decimal (2-4),Last Traded Price (LTP),Rupees,CM/FO,Price of the final trade executed in the session.,Session metrics.
+PrvsClsgPric,Decimal,Decimal (2-4),Previous Close Price,Rupees,CM/FO,Official closing price of the preceding trading session.,Daily return and price variation monitoring.
+UndrlygPric,Decimal,Decimal (2-4),Underlying Cash Price,Rupees,FO,Closing cash market price of the underlying equity/index at session end.,Moneyness and intrinsic value calculation for exercised options.
+SttlmPric,Decimal,Decimal (2-4),Settlement Price,Rupees,FO,Daily mark-to-market settlement price computed by clearing corporation.,Mark-to-market settlement base.
+OpnIntrst,Decimal,Integer,Open Interest (OI),Contracts/Lots,FO (0 in CM),Cumulative outstanding active contracts not yet squared off or settled.,Market depth and derivatives positioning.
+ChngInOpnIntrst,Decimal,Integer,Change in Open Interest,Contracts/Lots,FO (0 in CM),Net change in outstanding active contracts compared to prior session.,Market trend indicator.
+TtlTradgVol,Decimal,Integer,Total Traded Volume,"Quantity (Shares in CM) / Contracts (Lots in FO)",CM/FO,"In CM: number of individual equity shares traded. In FO: number of CONTRACTS (lots) executed.",Volume metric. In FO it is LOT COUNT, NOT individual shares.
+TtlTrfVal,Decimal,Decimal (2-4),Total Traded Value,Rupees (INR),CM/FO,"Total traded value in Indian Rupees. IN CM: actual cash turnover (shares * trade price). IN FO: NOTIONAL turnover for options ((Strike + Premium) * Contracts * LotQty) and actual futures turnover.",CRITICAL: In CM it is cash turnover. In FO Options it is NOTIONAL TURNOVER, NOT premium turnover!
+TtlNbOfTxsExctd,Decimal,Integer,Total Number of Trades Executed,Count,CM/FO,Total count of individual matched trade tickets.,Transaction activity and fee base calculations.
+SsnId,String,Text (2),Session ID,Code,CM/FO,"Identifier of trading session: 'F1' for Normal Market, 'B1' for Morning Block Deal, 'B2' for Afternoon Block Deal.",Allows isolating block deal windows and special sessions.
+NewBrdLotQty,Decimal,Integer,Board Lot Quantity,Quantity,CM/FO,"Market lot size: minimum contract trading unit (1 for CM; e.g. 25/50/75 for Nifty, 1550 for ABCAPITAL).",Essential multiplier to convert FO contracts into underlying share quantity.
+Rmks,String,Text,Remarks,Text,CM/FO,Exchange operational notes or flags.,Special announcements.
+Rsvd1,String,Text,Reserved Field 1,Text,CM/FO,Reserved for regulatory / exchange clearing expansion.,None.
+Rsvd2,String,Text,Reserved Field 2,Text,CM/FO,Reserved for regulatory / exchange clearing expansion.,None.
+Rsvd3,String,Text,Reserved Field 3,Text,CM/FO,Reserved for regulatory / exchange clearing expansion.,None.
+Rsvd4,String,Text,Reserved Field 4,Text,CM/FO,Reserved for regulatory / exchange clearing expansion.,None.

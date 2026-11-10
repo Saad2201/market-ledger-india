@@ -1,0 +1,54 @@
+{
+  "generated_at_ist": "2026-11-11T00:17:16+05:30",
+  "date_range": {
+    "start": "2026-04-01",
+    "end": "2026-11-09"
+  },
+  "this_run": {
+    "cm_udiff": {
+      "ok": 0,
+      "missing": 1,
+      "blocked": 0,
+      "error": 0,
+      "skipped": 222
+    },
+    "fo_udiff": {
+      "ok": 0,
+      "missing": 1,
+      "blocked": 0,
+      "error": 0,
+      "skipped": 222
+    },
+    "cm_security_delivery": {
+      "ok": 0,
+      "missing": 1,
+      "blocked": 0,
+      "error": 0,
+      "skipped": 222
+    }
+  },
+  "latest_historical_status": {
+    "cm_udiff": {
+      "ok": 152,
+      "missing": 71,
+      "blocked": 0,
+      "error": 0,
+      "not_recorded": 0
+    },
+    "fo_udiff": {
+      "ok": 152,
+      "missing": 71,
+      "blocked": 0,
+      "error": 0,
+      "not_recorded": 0
+    },
+    "cm_security_delivery": {
+      "ok": 191,
+      "missing": 32,
+      "blocked": 0,
+      "error": 0,
+      "not_recorded": 0
+    }
+  },
+  "important_note": "Historical status uses the latest manifest entry for each date and dataset. The manifest remains an append-only attempt log. Missing reports and non-trading days are not assumed to mean zero turnover. This is a raw-data collection report, not a government-revenue estimate. Tax calculations are withheld until source fields and taxable bases are reconciled and validated."
+}
