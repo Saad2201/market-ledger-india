@@ -808,6 +808,7 @@ table.data-table tr:hover td {
   </div>
 </div>
 
+<script src="data.js"></script>
 <script>
 let DATA = null;
 const $ = s => document.querySelector(s);
@@ -848,17 +849,22 @@ $$(".tab-btn").forEach(btn => {
   };
 });
 
-// Load and Render Data
-fetch("data.json", { cache: "no-store" })
-  .then(res => res.json())
-  .then(json => {
-    DATA = json;
-    initDashboard();
-  })
-  .catch(err => {
-    console.error("Failed to load data.json:", err);
-    $(".container").innerHTML = `<div style="padding:40px; text-align:center; color:var(--danger)"><h3>Failed to load market data feed.</h3><p>Ensure data.json is present in docs/ directory.</p></div>`;
-  });
+// Load and Render Data (supports both direct file:// offline browsing and web server fetch)
+if (typeof window.MARKET_DATA !== "undefined" && window.MARKET_DATA) {
+  DATA = window.MARKET_DATA;
+  initDashboard();
+} else {
+  fetch("data.json", { cache: "no-store" })
+    .then(res => res.json())
+    .then(json => {
+      DATA = json;
+      initDashboard();
+    })
+    .catch(err => {
+      console.error("Failed to load data.json:", err);
+      $(".container").innerHTML = `<div style="padding:40px; text-align:center; color:var(--danger)"><h3>Failed to load market data feed.</h3><p>Ensure data.json or data.js is present in docs/ directory.</p></div>`;
+    });
+}
 
 function initDashboard() {
   if (!DATA) return;

@@ -96,8 +96,15 @@ def build_data_json():
     with open(out_file, "w", encoding="utf-8") as f:
         json.dump(payload, f, separators=(",", ":"))
 
+    # Also generate docs/data.js for direct offline/file:// browsing without CORS restrictions
+    js_file = DOCS_DIR / "data.js"
+    with open(js_file, "w", encoding="utf-8") as f:
+        f.write("window.MARKET_DATA = ")
+        json.dump(payload, f, separators=(",", ":"))
+        f.write(";\n")
+
     size_kb = out_file.stat().st_size / 1024
-    print(f"Generated {out_file} ({size_kb:.1f} KB, {len(daily_records)} daily records).")
+    print(f"Generated {out_file} and {js_file} ({size_kb:.1f} KB, {len(daily_records)} daily records).")
     return payload
 
 if __name__ == "__main__":
