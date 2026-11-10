@@ -41,17 +41,17 @@ git commit -m "Deploy Market Ledger India v2.0 with complete dual-exchange data"
 5. Click **Create repository**.
 
 ### Step 2.3: Push Code to GitHub
-Copy and paste these commands into PowerShell (replace `Saad2226` with your GitHub username if different):
+Copy and paste these commands into PowerShell:
 
 ```powershell
-git remote add origin https://github.com/Saad2226/market-ledger-india.git
+git remote set-url origin https://github.com/Saad2201/market-ledger-india.git
 git push -u origin main
 ```
 
 *(If prompted to authenticate, sign in via your browser or paste a GitHub Personal Access Token).*
 
 ### Step 2.4: Turn On GitHub Pages
-1. On GitHub, navigate to your repository: `https://github.com/Saad2226/market-ledger-india`
+1. On GitHub, navigate to your repository: `https://github.com/Saad2201/market-ledger-india`
 2. Click **Settings** (top right tab).
 3. In the left sidebar, click **Pages** (under "Code and automation").
 4. Under **Build and deployment**:
@@ -62,7 +62,7 @@ git push -u origin main
 
 **Congratulations!** Within 60 seconds, your site will be live at:
 ```text
-https://Saad2226.github.io/market-ledger-india/
+https://Saad2201.github.io/market-ledger-india/
 ```
 Anyone in the world can now access your dashboard from mobile or desktop!
 
@@ -145,4 +145,4 @@ If you prefer custom hosting services with instant global CDNs:
 - [x] Local Windows Task Scheduler setup script created at `scripts/setup_windows_scheduler.ps1`.
 - [x] Automated batch runner updated at `nightly_market_ledger.bat`.
 - [x] Unit test suite verified (16/16 tests passing).
-- [x] Git configuration verified for user `Saad2226`.
+- [x] Git configuration verified for user `Saad2201`.
