@@ -14,7 +14,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "market-ledger-update"
+  group: "market-ledger-live"
   cancel-in-progress: true
 
 jobs:
