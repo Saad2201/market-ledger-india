@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>MarketLedger — Indian Stock Market Revenue & Tax Intelligence</title>
 <meta name="description" content="Auditable daily, monthly, and financial-year estimates of statutory revenue (STT, Stamp Duty, GST, SEBI Fees) generated from Indian stock market transactions across NSE and BSE.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script>
 (function() {
   const t = localStorage.getItem("ml_theme");
@@ -47,8 +50,8 @@
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
   
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 }
 
 [data-theme="dark"] {
@@ -72,7 +75,8 @@ body {
   font-family: var(--font-sans);
   background: var(--bg);
   color: var(--text);
-  line-height: 1.5;
+  font-size: 14.5px;
+  line-height: 1.55;
   display: flex;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
@@ -1217,138 +1221,138 @@ tr:hover td {
   line-height: 1.6;
 }
 
-/* Author Profile Section */
-.author-card {
-  margin-top: 24px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 26px;
-  box-shadow: var(--shadow-sm);
-}
-
-.author-layout {
+/* Section Divider Component */
+.section-divider {
   display: flex;
-  gap: 28px;
+  justify-content: space-between;
   align-items: center;
-}
-
-.author-photo-wrap {
-  position: relative;
-  flex-shrink: 0;
-}
-
-.author-photo {
-  width: 130px;
-  height: 165px;
-  border-radius: 12px;
-  object-fit: cover;
-  object-position: center top;
-  box-shadow: var(--shadow-md);
-  border: 2px solid var(--border);
-  display: block;
-}
-
-.author-badge-pill {
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #111827;
-  color: #60a5fa;
-  border: 1px solid #1e3a8a;
-  padding: 2px 10px;
-  border-radius: 12px;
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  white-space: nowrap;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.author-info {
-  flex: 1;
-}
-
-.author-name {
-  font-size: 20px;
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  color: var(--text);
-  margin-bottom: 2px;
-}
-
-.author-title {
-  font-size: 13px;
-  color: var(--accent-blue);
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
-.author-bio {
-  font-size: 13px;
-  color: var(--text-muted);
-  line-height: 1.6;
-  margin-bottom: 14px;
-}
-
-.author-tags {
-  display: flex;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 18px;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 16px;
+  gap: 12px;
 }
 
-.author-tag {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 11.5px;
-  font-weight: 500;
-  color: var(--text);
-}
-
-.author-links {
+.section-divider-title {
   display: flex;
+  align-items: center;
   gap: 10px;
 }
 
-.author-link-btn {
+.section-divider-title h2 {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.section-tag-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--accent-blue);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.badge-subtle {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 9px;
+  border-radius: 6px;
+  background: var(--surface-hover);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.section-divider-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Session Breakdown Grid */
+.session-breakdown-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 960px) {
+  .session-breakdown-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Sleek Tooltip Component */
+.info-tip {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text);
-  background: var(--bg);
-  border: 1px solid var(--border);
-  text-decoration: none;
-  transition: all 0.15s ease;
+  justify-content: center;
+  color: var(--text-dim);
+  cursor: help;
+  position: relative;
+  vertical-align: middle;
+  margin-left: 6px;
+  transition: color 0.15s ease;
+  line-height: 1;
 }
 
-.author-link-btn:hover {
-  background: var(--surface-hover);
-  border-color: var(--text-muted);
+.info-tip svg {
+  width: 14px;
+  height: 14px;
+  opacity: 0.75;
+  transition: opacity 0.15s ease, transform 0.15s ease;
 }
 
-@media (max-width: 768px) {
-  .author-layout {
-    flex-direction: column;
-    text-align: center;
-  }
-  .author-photo-wrap {
-    margin: 0 auto;
-  }
-  .author-tags, .author-links {
-    justify-content: center;
-  }
+.info-tip:hover svg {
+  opacity: 1;
+  color: var(--accent-blue);
+  transform: scale(1.15);
+}
+
+.info-tip::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: #0f172a;
+  color: #f8fafc;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 11.5px;
+  font-weight: 500;
+  line-height: 1.45;
+  width: max-content;
+  max-width: 280px;
+  text-align: left;
+  white-space: normal;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  font-family: var(--font-sans);
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+[data-theme="light"] .info-tip::after {
+  background: #1e293b;
+  color: #ffffff;
+  border-color: #475569;
+}
+
+.info-tip:hover::after,
+.info-tip:focus::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
 }
 
 /* Responsive */
@@ -1437,14 +1441,11 @@ tr:hover td {
   </div>
 
   <div class="sidebar-footer">
-    <div style="display:flex; align-items:center; gap: 8px;">
-      <img src="author.webp" alt="Mohammed Sadaquath" style="width:28px; height:28px; border-radius:50%; object-fit:cover; border: 1.5px solid #3b82f6;">
-      <div style="display:flex; flex-direction:column; line-height:1.2;">
-        <span style="color:#ffffff; font-weight:600; font-size:11.5px;">M. Sadaquath</span>
-        <span style="font-size:10px; color:#64748b;">Lead Architect</span>
-      </div>
+    <div style="display:flex; align-items:center;">
+      <span class="pulse-dot"></span>
+      <span id="sidebarLatestDate">Latest: 09 Nov 2026</span>
     </div>
-    <span style="font-size: 11px; color:#10b981; font-weight:600;">● Online</span>
+    <span style="font-size: 11px; color:#10b981; font-weight:600;">● Verified</span>
   </div>
 </aside>
 
@@ -1575,20 +1576,29 @@ tr:hover td {
         </div>
       </div>
 
-      <!-- Date Subheading -->
-      <div class="date-header-row">
-        <h2 id="currentDateTitle">09 November 2026</h2>
-        <span id="exchangeNotice">NSE + BSE covered trades — estimates, not actual collections</span>
+      <!-- Tier 1: Single-Session Snapshot -->
+      <div class="section-divider">
+        <div class="section-divider-title">
+          <span class="section-tag-dot"></span>
+          <h2 id="currentDateTitle">09 November 2026</h2>
+          <span class="badge-subtle">Selected Session Breakdown</span>
+        </div>
+        <span class="section-divider-sub" id="exchangeNotice">NSE + BSE covered trades — daily statutory estimates</span>
       </div>
 
-      <!-- 4 Top KPI Cards -->
+      <!-- 4 Top KPI Cards for Selected Date -->
       <div class="kpi-grid">
         <!-- Card 1: Primary Dark Blue Gradient -->
         <div class="kpi-card kpi-card-primary">
           <div class="kpi-top-row">
-            <span class="kpi-title">STT + stamp duty</span>
+            <span class="kpi-title">
+              STT + stamp duty
+              <span class="info-tip" data-tip="Combined statutory turnover taxes collected by stock exchanges on behalf of the Central Government (STT) and State Governments (Stamp Duty).">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              </span>
+            </span>
             <div class="kpi-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="3" y1="21" x2="21" y2="21"></line>
                 <line x1="3" y1="10" x2="21" y2="10"></line>
                 <polyline points="5 10 5 21"></polyline>
@@ -1609,9 +1619,14 @@ tr:hover td {
         <!-- Card 2: Securities Transaction Tax -->
         <div class="kpi-card">
           <div class="kpi-top-row">
-            <span class="kpi-title">Securities transaction tax</span>
+            <span class="kpi-title">
+              Securities transaction tax
+              <span class="info-tip" data-tip="Direct transaction tax levied by the Central Government under Chapter VII of the Finance (No. 2) Act 2004 on cash equities, futures, and option premiums.">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              </span>
+            </span>
             <div class="kpi-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="2" y="4" width="20" height="16" rx="2"></rect>
                 <line x1="12" y1="8" x2="12" y2="16"></line>
                 <line x1="8" y1="12" x2="16" y2="12"></line>
@@ -1630,9 +1645,14 @@ tr:hover td {
         <!-- Card 3: Stamp Duty -->
         <div class="kpi-card">
           <div class="kpi-top-row">
-            <span class="kpi-title">Stamp duty</span>
+            <span class="kpi-title">
+              Stamp duty
+              <span class="info-tip" data-tip="Levied under the Indian Stamp Act 1899 (Article 27, Schedule I) on BUY-side transactions only, collected by exchanges and remitted to the buyer's State Government.">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              </span>
+            </span>
             <div class="kpi-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
                 <polyline points="2 17 12 22 22 17"></polyline>
                 <polyline points="2 12 12 17 22 12"></polyline>
@@ -1651,7 +1671,12 @@ tr:hover td {
         <!-- Card 4: GST on known fees -->
         <div class="kpi-card">
           <div class="kpi-top-row">
-            <span class="kpi-title">GST on known fees</span>
+            <span class="kpi-title">
+              GST on known fees
+              <span class="info-tip" data-tip="18% Goods and Services Tax levied strictly on financial service fees: Exchange Transaction Charges + SEBI Turnover Fees. Traded market turnover itself is GST-exempt.">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              </span>
+            </span>
             <span class="kpi-pill-tag">Service Tax</span>
           </div>
           <div class="kpi-value-wrap">
@@ -1664,118 +1689,124 @@ tr:hover td {
         </div>
       </div>
 
-      <!-- Middle Analytics Grid (Time Series Chart + Segment Breakdown) -->
-      <div class="analytics-grid">
-        <!-- Chart: Tax Generation Over Time -->
+      <!-- Single-Day Breakdown Grid (2 Equal Columns) -->
+      <div class="session-breakdown-grid">
+        <!-- Segment Breakdown Progress Bars for Selected Day -->
         <div class="card">
           <div class="card-header">
             <div>
-              <h3>Tax generation over time</h3>
-              <p id="chartTimeWindowSubtitle">1 Nov – 9 Nov · 6 verified trading days</p>
-            </div>
-            <div class="chart-legend">
-              <div class="legend-item"><span class="legend-dot" style="background:#2563eb;"></span> STT</div>
-              <div class="legend-item"><span class="legend-dot" style="background:#7c3aed;"></span> Stamp duty</div>
-            </div>
-          </div>
-          <div class="card-stat-highlight" id="chartWindowTotalVal">
-            ₹ 1,745.20 Cr <span>STT + stamp duty this period</span>
-          </div>
-          <div class="chart-container" id="chartContainer">
-            <!-- Dynamic SVG injected here -->
-          </div>
-        </div>
-
-        <!-- Segment Breakdown Progress Bars -->
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <h3>Segment breakdown</h3>
-              <p>STT + stamp duty · selected day</p>
+              <h3>
+                Segment breakdown
+                <span class="info-tip" data-tip="Statutory tax revenue (STT + Stamp Duty) generated across equity cash and derivatives segments for this trading session.">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                </span>
+              </h3>
+              <p>STT + stamp duty · selected trading day</p>
             </div>
           </div>
           <div class="segment-list" id="segmentMetersList">
-            <!-- Dynamic segment bars injected here -->
+            <!-- Dynamic segment bars injected here with tooltips -->
+          </div>
+        </div>
+
+        <!-- Right Side: Delivery Bounds & Exchange Share -->
+        <div style="display:flex; flex-direction:column; gap:20px;">
+          <!-- Delivery Bounds -->
+          <div class="card" style="flex:1;">
+            <div class="card-header">
+              <div>
+                <h3>
+                  Delivery bounds (STT sensitivity)
+                  <span class="info-tip" data-tip="Sensitivity modeling showing how equity cash STT ranges depending on the exact proportion of delivery trades (0.10% buy & sell) versus intraday trades (0.025% sell-only).">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                  </span>
+                </h3>
+                <p>Cash delivery rate (0.10% buy & sell) vs intraday (0.025% sell-only)</p>
+              </div>
+            </div>
+            <div class="bounds-summary">
+              <div class="bound-box">
+                <div class="bound-box-label">
+                  Floor (100% Intraday)
+                  <span class="info-tip" data-tip="Theoretical minimum STT assuming 100% of cash market trades are intraday (taxed at 0.025% on sell side only).">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                  </span>
+                </div>
+                <div class="bound-box-val" id="boundFloorVal">₹ 31.87 Cr</div>
+              </div>
+              <div class="bound-box" style="border-color: #2563eb; background: rgba(37, 99, 235, 0.04);">
+                <div class="bound-box-label" style="color:#2563eb;">
+                  Modeled Delivery
+                  <span class="info-tip" data-tip="Primary validated estimate weighted by exchange-reported gross delivery percentage (taxed at 0.10% each on buy and sell delivery trades, and 0.025% for intraday).">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                  </span>
+                </div>
+                <div class="bound-box-val" style="color:#2563eb;" id="boundModeledVal">₹ 129.93 Cr</div>
+              </div>
+              <div class="bound-box">
+                <div class="bound-box-label">
+                  Ceiling (100% Deliv)
+                  <span class="info-tip" data-tip="Theoretical maximum STT assuming 100% of cash market trades result in physical delivery (taxed at 0.10% on both buy & sell sides = 0.20% total).">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                  </span>
+                </div>
+                <div class="bound-box-val" id="boundCeilVal">₹ 254.93 Cr</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Exchange Market Share for Selected Day -->
+          <div class="card" style="flex:1;">
+            <div class="card-header">
+              <div>
+                <h3>
+                  Exchange market share
+                  <span class="info-tip" data-tip="Proportion of statutory taxes collected from transactions executed on NSE versus BSE for the selected day.">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                  </span>
+                </h3>
+                <p>Statutory collections split on selected day</p>
+              </div>
+            </div>
+            <div class="exchange-split-bar">
+              <div class="split-nse" id="barNseShare" style="width: 85%;"></div>
+              <div class="split-bse" id="barBseShare" style="width: 15%;"></div>
+            </div>
+            <div class="exchange-labels">
+              <span style="color:#2563eb;" id="labelNseShare">NSE: ₹ 274.43 Cr (93.6%)</span>
+              <span style="color:#d97706;" id="labelBseShare">BSE: ₹ 18.83 Cr (6.4%)</span>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Secondary Row: Exchange Comparison & Delivery Bounds -->
-      <div class="secondary-grid">
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <h3>Exchange market share</h3>
-              <p>Statutory collections split on selected day</p>
-            </div>
-          </div>
-          <div class="exchange-split-bar">
-            <div class="split-nse" id="barNseShare" style="width: 85%;"></div>
-            <div class="split-bse" id="barBseShare" style="width: 15%;"></div>
-          </div>
-          <div class="exchange-labels">
-            <span style="color:#2563eb;" id="labelNseShare">NSE: ₹ 274.43 Cr (93.6%)</span>
-            <span style="color:#d97706;" id="labelBseShare">BSE: ₹ 18.83 Cr (6.4%)</span>
-          </div>
+      <!-- Tier 2: Multi-Day History Window & Trend -->
+      <div class="section-divider" style="margin-top: 36px;">
+        <div class="section-divider-title">
+          <span class="section-tag-dot" style="background:#7c3aed;"></span>
+          <h2 id="historySectionHeading">Multi-Day Trajectory · Month to Date</h2>
+          <span class="badge-subtle" id="historyWindowBadge">Multi-Day Trend</span>
         </div>
-
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <h3>Delivery bounds (STT sensitivity)</h3>
-              <p>Equity cash delivery rate (0.10%) vs intraday (0.025%)</p>
-            </div>
-          </div>
-          <div class="bounds-summary">
-            <div class="bound-box">
-              <div class="bound-box-label">Floor (100% Intraday)</div>
-              <div class="bound-box-val" id="boundFloorVal">₹ 31.87 Cr</div>
-            </div>
-            <div class="bound-box" style="border-color: #2563eb;">
-              <div class="bound-box-label" style="color:#2563eb;">Modeled Delivery</div>
-              <div class="bound-box-val" style="color:#2563eb;" id="boundModeledVal">₹ 129.93 Cr</div>
-            </div>
-            <div class="bound-box">
-              <div class="bound-box-label">Ceiling (100% Deliv)</div>
-              <div class="bound-box-val" id="boundCeilVal">₹ 254.93 Cr</div>
-            </div>
-          </div>
-        </div>
+        <span class="section-divider-sub" id="historySectionSub">Cumulative statutory collections and daily trend over your selected history window</span>
       </div>
 
-      <!-- Author & Quantitative Research Lead Section -->
-      <div class="card author-card">
-        <div class="author-layout">
-          <div class="author-photo-wrap">
-            <img src="author.webp" alt="Mohammed Sadaquath" class="author-photo">
-            <div class="author-badge-pill">
-              <span class="pulse-dot"></span> Lead Architect
-            </div>
+      <!-- Full-Width Chart Card: Tax Generation Over Time -->
+      <div class="card" style="margin-bottom: 24px;">
+        <div class="card-header">
+          <div>
+            <h3>Tax generation over time</h3>
+            <p id="chartTimeWindowSubtitle">1 Nov – 9 Nov · 6 verified trading sessions</p>
           </div>
-          <div class="author-info">
-            <div class="section-meta" style="margin-bottom: 6px;">Platform Architecture & Quantitative Research</div>
-            <h2 class="author-name">Mohammed Sadaquath</h2>
-            <p class="author-title">Quantitative Financial Data Engineer · Platform Architect</p>
-            <p class="author-bio">
-              Architect and developer of <strong>MarketLedger — India</strong>, an independent financial intelligence platform delivering end-to-end statutory auditability and transparency for Indian capital market transactions. Engineered dual-exchange ingestion pipelines processing high-volume primary BhavCopy and settlement datasets from the National Stock Exchange of India (NSE) and BSE India, implementing high-precision statutory tax models covering STT, Stamp Duty, GST on financial services, and SEBI regulatory fees.
-            </p>
-            <div class="author-tags">
-              <span class="author-tag">🏛️ Dual-Exchange Ingestion</span>
-              <span class="author-tag">⚖️ Finance Act 2024 Model</span>
-              <span class="author-tag">📈 152 Sessions Verified</span>
-              <span class="author-tag">⚡ Decimal Precision</span>
-            </div>
-            <div class="author-links">
-              <a href="https://github.com/Saad2201" target="_blank" class="author-link-btn">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                GitHub Profile
-              </a>
-              <a href="https://github.com/Saad2201/market-ledger-india" target="_blank" class="author-link-btn" style="background: var(--surface-hover);">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-                Repository
-              </a>
-            </div>
+          <div class="chart-legend">
+            <div class="legend-item"><span class="legend-dot" style="background:#2563eb;"></span> STT (Central Gov)</div>
+            <div class="legend-item"><span class="legend-dot" style="background:#7c3aed;"></span> Stamp Duty (States)</div>
           </div>
+        </div>
+        <div class="card-stat-highlight" id="chartWindowTotalVal">
+          ₹ 1,745.20 Cr <span>STT + stamp duty this period</span>
+        </div>
+        <div class="chart-container" id="chartContainer">
+          <!-- Dynamic SVG injected here -->
         </div>
       </div>
     </section>
@@ -1812,15 +1843,50 @@ tr:hover td {
             <thead>
               <tr>
                 <th>Trade Date</th>
-                <th class="num-cell">Total Turnover (Cr)</th>
+                <th class="num-cell">
+                  Total Turnover (Cr)
+                  <span class="info-tip" data-tip="Combined traded turnover across Cash Equity, Futures, and Options Premium across NSE and BSE.">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                  </span>
+                </th>
                 <th class="num-cell">Cash Turnover</th>
                 <th class="num-cell">Futures Traded</th>
-                <th class="num-cell">Options Premium</th>
-                <th class="num-cell" style="color:var(--text-dim);">Options Notional</th>
-                <th class="num-cell" style="color:#2563eb;">STT Total</th>
-                <th class="num-cell" style="color:#7c3aed;">Stamp Duty</th>
-                <th class="num-cell" style="color:#059669;">GST Known</th>
-                <th class="num-cell" style="color:#d97706;">SEBI Fee</th>
+                <th class="num-cell">
+                  Options Premium
+                  <span class="info-tip" data-tip="Actual traded premium value of options contracts (taxable base for STT & Stamp Duty).">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                  </span>
+                </th>
+                <th class="num-cell" style="color:var(--text-dim);">
+                  Options Notional
+                  <span class="info-tip" data-tip="Total underlying contract value (Strike × Volume × Lot). Exempt from transaction tax; shown for contract scale reference only.">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                  </span>
+                </th>
+                <th class="num-cell" style="color:#2563eb;">
+                  STT Total
+                  <span class="info-tip" data-tip="Securities Transaction Tax collected on behalf of the Central Government.">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                  </span>
+                </th>
+                <th class="num-cell" style="color:#7c3aed;">
+                  Stamp Duty
+                  <span class="info-tip" data-tip="Indian Stamp Duty collected on BUY-side transactions only, remitted to respective State Governments.">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                  </span>
+                </th>
+                <th class="num-cell" style="color:#059669;">
+                  GST Known
+                  <span class="info-tip" data-tip="18% GST levied on exchange transaction charges and SEBI turnover fees. Traded turnover is GST-exempt.">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                  </span>
+                </th>
+                <th class="num-cell" style="color:#d97706;">
+                  SEBI Fee
+                  <span class="info-tip" data-tip="Regulatory fee of ₹10 per crore (0.0001%) paid to the Securities and Exchange Board of India.">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                  </span>
+                </th>
                 <th class="num-cell" style="font-weight:700;">Total Gov Tax</th>
                 <th class="num-cell" style="font-weight:700; color:#2563eb;">Total Statutory</th>
                 <th>Status</th>
@@ -2309,10 +2375,30 @@ function renderSegmentBreakdown(r) {
   const intradayTax = (r.stt_equity_intraday_cr || 0) + (r.stamp_duty_equity_intraday_cr || 0);
 
   const segments = [
-    { name: "Shares · delivery", val: deliveryTax, color: "#2563eb" },
-    { name: "Index & stock options", val: optionsTax, color: "#059669" },
-    { name: "Futures (Stock & Index)", val: futuresTax, color: "#7c3aed" },
-    { name: "Shares · intraday", val: intradayTax, color: "#d97706" }
+    {
+      name: "Shares · delivery",
+      tip: "Delivery equity trades taxed at 0.10% STT on both buy & sell sides (0.20% combined) + 0.015% buy-side Stamp Duty.",
+      val: deliveryTax,
+      color: "#2563eb"
+    },
+    {
+      name: "Index & stock options",
+      tip: "Taxed strictly on traded option premium (0.10% STT on sell side + 0.003% buy-side Stamp Duty). Notional contract value is not taxed.",
+      val: optionsTax,
+      color: "#059669"
+    },
+    {
+      name: "Futures (Stock & Index)",
+      tip: "Taxed on total traded futures contract turnover (0.02% STT on sell side + 0.002% buy-side Stamp Duty).",
+      val: futuresTax,
+      color: "#7c3aed"
+    },
+    {
+      name: "Shares · intraday",
+      tip: "Non-delivery equity trades squared off within the same session (0.025% STT on sell side + 0.003% buy-side Stamp Duty).",
+      val: intradayTax,
+      color: "#d97706"
+    }
   ];
 
   const maxVal = Math.max(1, ...segments.map(s => s.val));
@@ -2323,7 +2409,12 @@ function renderSegmentBreakdown(r) {
     return `
       <div class="segment-item">
         <div class="segment-meta">
-          <span class="segment-name">${s.name}</span>
+          <span class="segment-name">
+            ${s.name}
+            <span class="info-tip" data-tip="${s.tip}">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            </span>
+          </span>
           <span class="segment-val">${fmtNum(s.val)} <span style="font-size:11px; color:var(--text-muted)">Cr</span></span>
         </div>
         <div class="meter-track">
@@ -2356,11 +2447,22 @@ function renderTimeSeriesChart() {
 
   if (!sliceRecords.length) sliceRecords = [DATA.daily_records[currentDayIdx]];
 
-  // Update chart header labels
-  const totalWindowTax = sliceRecords.reduce((acc, r) => acc + (r.stt_total_cr + r.stamp_duty_total_cr), 0);
+  // Update Section 2 Header based on active history window
   const firstD = sliceRecords[0].trade_date;
   const lastD = sliceRecords[sliceRecords.length - 1].trade_date;
-  $("#chartTimeWindowSubtitle").textContent = `${formatDate(firstD)} – ${formatDate(lastD)} · ${sliceRecords.length} trading days`;
+
+  let windowTitle = "Month to Date";
+  if (windowMode === "7D") windowTitle = "Last 7 Days";
+  else if (windowMode === "30D") windowTitle = "Last 30 Days";
+  else if (windowMode === "ALL") windowTitle = "All Sessions";
+
+  $("#historySectionHeading").textContent = `Multi-Day Trajectory · ${windowTitle}`;
+  $("#historyWindowBadge").textContent = `${sliceRecords.length} Sessions`;
+  $("#historySectionSub").textContent = `Cumulative statutory collections and daily trend from ${formatDate(firstD)} to ${formatDate(lastD)}`;
+
+  // Update chart header labels
+  const totalWindowTax = sliceRecords.reduce((acc, r) => acc + (r.stt_total_cr + r.stamp_duty_total_cr), 0);
+  $("#chartTimeWindowSubtitle").textContent = `${formatDate(firstD)} – ${formatDate(lastD)} · ${sliceRecords.length} verified trading sessions`;
   $("#chartWindowTotalVal").innerHTML = `${fmtCr(totalWindowTax)} <span>STT + stamp duty this period</span>`;
 
   // Draw Smooth SVG Chart
