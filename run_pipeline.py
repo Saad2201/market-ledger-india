@@ -133,7 +133,8 @@ def main():
         if fy_path.exists():
             with open(fy_path, "r", encoding="utf-8-sig") as f:
                 row = next(csv.DictReader(f))
-                log(f"EXECUTIVE SUMMARY (152 Trading Days):")
+                days_count = row.get("trading_days", "152")
+                log(f"EXECUTIVE SUMMARY ({days_count} Trading Days):")
                 log(f"  • Total Market Turnover:     ₹{float(row['total_market_turnover_cr']):,.2f} Cr")
                 log(f"  • Central Gov STT:           ₹{float(row['central_gov_revenue_cr']):,.2f} Cr")
                 log(f"  • State Gov Stamp Duty:      ₹{float(row['state_gov_revenue_cr']):,.2f} Cr")

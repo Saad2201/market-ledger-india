@@ -500,7 +500,7 @@ body {
   border: none;
   background: transparent;
   outline: none;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   cursor: pointer;
 }
 
@@ -511,6 +511,7 @@ body {
   padding: 8px 12px;
   font-size: 13px;
   font-weight: 500;
+  font-family: var(--font-sans);
   color: var(--text);
   outline: none;
   height: 38px;
@@ -520,6 +521,153 @@ body {
 
 .select-ctrl:focus {
   border-color: var(--accent-blue);
+}
+
+/* Custom Modern Dropdowns */
+.custom-select-group {
+  position: relative;
+}
+
+.custom-select-trigger {
+  width: 100%;
+  height: 38px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0 12px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.15s ease;
+  user-select: none;
+  text-align: left;
+}
+
+.custom-select-trigger:hover {
+  background: var(--surface-hover);
+  border-color: var(--text-muted);
+}
+
+.custom-select-trigger:focus-visible,
+.custom-select-trigger.open {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.custom-select-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.custom-select-trigger .chevron-icon {
+  color: var(--text-muted);
+  flex-shrink: 0;
+  margin-left: 8px;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.15s ease;
+}
+
+.custom-select-trigger.open .chevron-icon {
+  transform: rotate(180deg);
+  color: var(--accent-blue);
+}
+
+.custom-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  min-width: 190px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
+  padding: 6px;
+  z-index: 160;
+  animation: dropdownFadeIn 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: var(--font-sans);
+}
+
+[data-theme="dark"] .custom-dropdown-menu {
+  background: #111827;
+  border-color: #1f2937;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.55);
+}
+
+.custom-dropdown-menu.open {
+  display: block;
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  color: var(--text);
+  cursor: pointer;
+  transition: background-color 0.12s ease, color 0.12s ease;
+  user-select: none;
+  gap: 8px;
+}
+
+.dropdown-item:hover {
+  background: var(--surface-hover);
+}
+
+[data-theme="dark"] .dropdown-item:hover {
+  background: #1f2937;
+}
+
+.dropdown-item.selected {
+  background: rgba(37, 99, 235, 0.1);
+  color: var(--accent-blue);
+  font-weight: 600;
+}
+
+[data-theme="dark"] .dropdown-item.selected {
+  background: rgba(59, 130, 246, 0.18);
+  color: #60a5fa;
+}
+
+.dropdown-item .check-icon {
+  opacity: 0;
+  color: var(--accent-blue);
+  flex-shrink: 0;
+  transition: opacity 0.15s ease;
+}
+
+[data-theme="dark"] .dropdown-item .check-icon {
+  color: #60a5fa;
+}
+
+.dropdown-item.selected .check-icon {
+  opacity: 1;
 }
 
 /* Dropdown & Popover styling with full theme support */
@@ -537,12 +685,14 @@ select {
   color-scheme: inherit;
   background-color: var(--surface);
   color: var(--text);
+  font-family: var(--font-sans);
 }
 
 select option {
   background-color: var(--surface);
   color: var(--text);
   padding: 8px 12px;
+  font-family: var(--font-sans);
 }
 
 [data-theme="dark"] select option {
@@ -584,7 +734,7 @@ select option {
   font-size: 13px;
   font-weight: 600;
   color: var(--text);
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   cursor: pointer;
   height: 100%;
   padding: 0 10px;
@@ -685,11 +835,12 @@ select option {
   align-items: center;
   padding: 8px 10px;
   border-radius: 6px;
-  font-size: 12px;
+  font-size: 12.5px;
+  font-weight: 500;
   cursor: pointer;
   color: var(--text);
   transition: background-color 0.1s ease;
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
 }
 
 .date-option-item:hover {
@@ -1313,12 +1464,44 @@ tr:hover td {
   transform: scale(1.15);
 }
 
+/* Sleek Tooltip Component */
+.info-tip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  cursor: help;
+  position: relative;
+  vertical-align: middle;
+  margin-left: 6px;
+  transition: color 0.15s ease;
+  line-height: 1;
+}
+
+.info-tip svg {
+  width: 14px;
+  height: 14px;
+  opacity: 0.75;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.info-tip:hover svg,
+.info-tip:focus svg {
+  opacity: 1;
+  color: var(--accent-blue);
+  transform: scale(1.15);
+}
+
+/* Disable pseudo-element tooltip since the global body tooltip renders cleanly without overflow clipping */
 .info-tip::after {
-  content: attr(data-tip);
-  position: absolute;
-  bottom: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%) translateY(4px);
+  display: none !important;
+}
+
+/* Global Floating Tooltip (Attached directly to <body> to avoid any container overflow clipping) */
+.global-floating-tooltip {
+  position: fixed;
+  top: 0;
+  left: 0;
   background: #0f172a;
   color: #f8fafc;
   border: 1px solid #334155;
@@ -1328,31 +1511,30 @@ tr:hover td {
   font-weight: 500;
   line-height: 1.45;
   width: max-content;
-  max-width: 280px;
+  max-width: 290px;
   text-align: left;
   white-space: normal;
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.15s ease, transform 0.15s ease;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
-  z-index: 999;
+  transition: opacity 0.15s cubic-bezier(0.16, 1, 0.3, 1), transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.45), 0 8px 10px -6px rgba(0, 0, 0, 0.35);
+  z-index: 99999;
   font-family: var(--font-sans);
   text-transform: none;
   letter-spacing: normal;
 }
 
-[data-theme="light"] .info-tip::after {
+[data-theme="light"] .global-floating-tooltip {
   background: #1e293b;
   color: #ffffff;
   border-color: #475569;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.25), 0 8px 10px -6px rgba(15, 23, 42, 0.15);
 }
 
-.info-tip:hover::after,
-.info-tip:focus::after {
+.global-floating-tooltip.visible {
   opacity: 1;
   visibility: visible;
-  transform: translateX(-50%) translateY(0);
 }
 
 /* Responsive */
@@ -1547,31 +1729,95 @@ tr:hover td {
           </div>
         </div>
 
-        <div class="filter-group">
+        <div class="filter-group custom-select-group" id="groupExchange">
           <label class="filter-label">Exchange</label>
-          <select class="select-ctrl" id="selectExchange">
-            <option value="ALL">NSE + BSE</option>
+          <button type="button" class="custom-select-trigger" id="triggerExchange" aria-haspopup="listbox" aria-expanded="false">
+            <span class="custom-select-label" id="labelExchange">NSE + BSE</span>
+            <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="custom-dropdown-menu" id="menuExchange" role="listbox">
+            <div class="dropdown-item selected" data-value="ALL" role="option">
+              <span>NSE + BSE</span>
+              <svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <div class="dropdown-item" data-value="NSE" role="option">
+              <span>NSE only</span>
+              <svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <div class="dropdown-item" data-value="BSE" role="option">
+              <span>BSE only</span>
+              <svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+          </div>
+          <select id="selectExchange" style="display:none;">
+            <option value="ALL" selected>NSE + BSE</option>
             <option value="NSE">NSE only</option>
             <option value="BSE">BSE only</option>
           </select>
         </div>
 
-        <div class="filter-group">
+        <div class="filter-group custom-select-group" id="groupSegment">
           <label class="filter-label">Segment</label>
-          <select class="select-ctrl" id="selectSegment">
-            <option value="ALL">All segments</option>
+          <button type="button" class="custom-select-trigger" id="triggerSegment" aria-haspopup="listbox" aria-expanded="false">
+            <span class="custom-select-label" id="labelSegment">All segments</span>
+            <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="custom-dropdown-menu" id="menuSegment" role="listbox">
+            <div class="dropdown-item selected" data-value="ALL" role="option">
+              <span>All segments</span>
+              <svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <div class="dropdown-item" data-value="CASH" role="option">
+              <span>Cash equity only</span>
+              <svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <div class="dropdown-item" data-value="DERIVATIVES" role="option">
+              <span>Derivatives (F&O) only</span>
+              <svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+          </div>
+          <select id="selectSegment" style="display:none;">
+            <option value="ALL" selected>All segments</option>
             <option value="CASH">Cash equity only</option>
             <option value="DERIVATIVES">Derivatives (F&O) only</option>
           </select>
         </div>
 
-        <div class="filter-group">
+        <div class="filter-group custom-select-group" id="groupHistory">
           <label class="filter-label">History window</label>
-          <select class="select-ctrl" id="selectHistory">
-            <option value="MTD">Month to date</option>
+          <button type="button" class="custom-select-trigger" id="triggerHistory" aria-haspopup="listbox" aria-expanded="false">
+            <span class="custom-select-label" id="labelHistory">Month to date</span>
+            <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="custom-dropdown-menu" id="menuHistory" role="listbox">
+            <div class="dropdown-item selected" data-value="MTD" role="option">
+              <span>Month to date</span>
+              <svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <div class="dropdown-item" data-value="30D" role="option">
+              <span>Last 30 days</span>
+              <svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <div class="dropdown-item" data-value="7D" role="option">
+              <span>Last 7 days</span>
+              <svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <div class="dropdown-item" data-value="ALL" role="option">
+              <span id="historyOptionAll">All sessions (152 days)</span>
+              <svg class="check-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+          </div>
+          <select id="selectHistory" style="display:none;">
+            <option value="MTD" selected>Month to date</option>
             <option value="30D">Last 30 days</option>
             <option value="7D">Last 7 days</option>
-            <option value="ALL">All sessions (152 days)</option>
+            <option value="ALL" id="selectHistoryAllOption">All sessions (152 days)</option>
           </select>
         </div>
       </div>
@@ -1813,11 +2059,11 @@ tr:hover td {
 
     <!-- TAB 2: DAILY LEDGER -->
     <section class="tab-panel" id="tabDailyLedger">
-      <div class="section-meta">Historical Records / 152 Trading Days</div>
+      <div class="section-meta" id="ledgerSectionMeta">Historical Records / 152 Trading Days</div>
       <div class="header-row">
         <div class="header-title-block">
           <h1>Daily ledger</h1>
-          <p>Complete dual-exchange statutory tax calculations from 1 April 2026 to 9 November 2026.</p>
+          <p id="ledgerSectionSubtitle">Complete dual-exchange statutory tax calculations from 1 April 2026 to 9 November 2026.</p>
         </div>
         <div class="header-btns">
           <button class="btn btn-primary" id="btnExportLedger">
@@ -2039,6 +2285,20 @@ function initApp() {
   $("#sidebarLatestDate").textContent = `Latest: ${formatDate(latestDate)}`;
   $("#topLatestReport").textContent = `Latest report · ${formatDate(latestDate)}`;
 
+  // Dynamically update session counts & ledger subtitles
+  const allSessionsText = `All sessions (${totalDays} days)`;
+  const histOptAll = $("#historyOptionAll");
+  if (histOptAll) histOptAll.textContent = allSessionsText;
+  const selHistAll = $("#selectHistoryAllOption");
+  if (selHistAll) selHistAll.textContent = allSessionsText;
+
+  const ledgerMeta = $("#ledgerSectionMeta");
+  if (ledgerMeta) ledgerMeta.textContent = `Historical Records / ${totalDays} Trading Days`;
+  const ledgerSub = $("#ledgerSectionSubtitle");
+  if (ledgerSub && DATA.daily_records.length > 0) {
+    ledgerSub.textContent = `Complete dual-exchange statutory tax calculations from ${formatDate(DATA.daily_records[0].trade_date)} to ${formatDate(latestDate)}.`;
+  }
+
   // Initialize Date Display & Popover
   updateDateDisplay();
   buildDatePopover();
@@ -2047,23 +2307,64 @@ function initApp() {
   const dateDropdownBtn = $("#btnDateDropdown");
   const datePopover = $("#datePickerPopover");
 
+  // Setup generic custom select dropdown
+  function setupCustomSelect(triggerId, menuId, selectId, labelId) {
+    const trigger = $(triggerId);
+    const menu = $(menuId);
+    const select = $(selectId);
+    const label = $(labelId);
+    if (!trigger || !menu || !select || !label) return;
+
+    trigger.addEventListener("click", e => {
+      e.stopPropagation();
+      const isOpen = menu.classList.contains("open");
+      closeAllDropdowns();
+      if (!isOpen) {
+        menu.classList.add("open");
+        trigger.classList.add("open");
+        trigger.setAttribute("aria-expanded", "true");
+      }
+    });
+
+    menu.querySelectorAll(".dropdown-item").forEach(item => {
+      item.addEventListener("click", e => {
+        e.stopPropagation();
+        const val = item.dataset.value;
+        const text = item.querySelector("span").textContent;
+        select.value = val;
+        label.textContent = text;
+        menu.querySelectorAll(".dropdown-item").forEach(i => i.classList.remove("selected"));
+        item.classList.add("selected");
+        closeAllDropdowns();
+        renderOverview();
+      });
+    });
+  }
+
+  // Initialize Custom Selects
+  setupCustomSelect("#triggerExchange", "#menuExchange", "#selectExchange", "#labelExchange");
+  setupCustomSelect("#triggerSegment", "#menuSegment", "#selectSegment", "#labelSegment");
+  setupCustomSelect("#triggerHistory", "#menuHistory", "#selectHistory", "#labelHistory");
+
   dateDropdownBtn.addEventListener("click", e => {
     e.stopPropagation();
-    datePopover.classList.toggle("open");
-    if (datePopover.classList.contains("open")) {
+    const isOpen = datePopover.classList.contains("open");
+    closeAllDropdowns();
+    if (!isOpen) {
+      datePopover.classList.add("open");
       $("#dateSearchInput").focus();
     }
   });
 
-  // Close Popover on Outside Click or Escape
-  document.addEventListener("click", e => {
-    if (!datePopover.contains(e.target) && e.target !== dateDropdownBtn) {
-      datePopover.classList.remove("open");
-    }
+  datePopover.addEventListener("click", e => e.stopPropagation());
+
+  // Close Popovers on Outside Click or Escape
+  document.addEventListener("click", () => {
+    closeAllDropdowns();
   });
 
   document.addEventListener("keydown", e => {
-    if (e.key === "Escape") datePopover.classList.remove("open");
+    if (e.key === "Escape") closeAllDropdowns();
   });
 
   // Wire Tab Switching
@@ -2087,15 +2388,27 @@ function initApp() {
     if (currentDayIdx < DATA.daily_records.length - 1) selectDate(currentDayIdx + 1);
   });
 
-  $("#selectExchange").addEventListener("change", renderOverview);
-  $("#selectSegment").addEventListener("change", renderOverview);
-  $("#selectHistory").addEventListener("change", renderOverview);
+  $("#selectExchange").addEventListener("change", () => {
+    updateCustomSelectUI("#selectExchange", "#labelExchange", "#menuExchange");
+    renderOverview();
+  });
+  $("#selectSegment").addEventListener("change", () => {
+    updateCustomSelectUI("#selectSegment", "#labelSegment", "#menuSegment");
+    renderOverview();
+  });
+  $("#selectHistory").addEventListener("change", () => {
+    updateCustomSelectUI("#selectHistory", "#labelHistory", "#menuHistory");
+    renderOverview();
+  });
 
   $("#btnRefresh").addEventListener("click", () => {
     selectDate(DATA.daily_records.length - 1);
     $("#selectExchange").value = "ALL";
     $("#selectSegment").value = "ALL";
     $("#selectHistory").value = "MTD";
+    updateCustomSelectUI("#selectExchange", "#labelExchange", "#menuExchange");
+    updateCustomSelectUI("#selectSegment", "#labelSegment", "#menuSegment");
+    updateCustomSelectUI("#selectHistory", "#labelHistory", "#menuHistory");
     renderOverview();
   });
 
@@ -2130,12 +2443,41 @@ function initApp() {
   });
 
   // Initial Renders
+  updateCustomSelectUI("#selectExchange", "#labelExchange", "#menuExchange");
+  updateCustomSelectUI("#selectSegment", "#labelSegment", "#menuSegment");
+  updateCustomSelectUI("#selectHistory", "#labelHistory", "#menuHistory");
   renderOverview();
   renderLedgerTable("");
   renderMethodologyRates();
 }
 
 let activeMonthFilter = "ALL";
+
+function closeAllDropdowns() {
+  $$(".custom-dropdown-menu").forEach(m => m.classList.remove("open"));
+  $$(".custom-select-trigger").forEach(t => {
+    t.classList.remove("open");
+    t.setAttribute("aria-expanded", "false");
+  });
+  const datePopover = $("#datePickerPopover");
+  if (datePopover) datePopover.classList.remove("open");
+}
+
+function updateCustomSelectUI(selectId, labelId, menuId) {
+  const select = $(selectId);
+  const label = $(labelId);
+  const menu = $(menuId);
+  if (!select || !label || !menu) return;
+  const curVal = select.value;
+  menu.querySelectorAll(".dropdown-item").forEach(item => {
+    if (item.dataset.value === curVal) {
+      item.classList.add("selected");
+      label.textContent = item.querySelector("span").textContent;
+    } else {
+      item.classList.remove("selected");
+    }
+  });
+}
 
 function updateDateDisplay() {
   const r = DATA.daily_records[currentDayIdx];
@@ -2149,7 +2491,7 @@ function selectDate(idx) {
   updateDateDisplay();
   highlightSelectedDateItem();
   renderOverview();
-  $("#datePickerPopover").classList.remove("open");
+  closeAllDropdowns();
 }
 
 function highlightSelectedDateItem() {
@@ -2608,6 +2950,80 @@ function exportCSV() {
   link.click();
   document.body.removeChild(link);
 }
+
+// Global Floating Tooltip System (Attached to body to prevent any overflow clipping in tables)
+const globalTooltip = document.createElement("div");
+globalTooltip.className = "global-floating-tooltip";
+document.body.appendChild(globalTooltip);
+
+let activeTooltipTarget = null;
+
+function showFloatingTooltip(el) {
+  const tip = el.getAttribute("data-tip");
+  if (!tip) return;
+  activeTooltipTarget = el;
+  globalTooltip.textContent = tip;
+  globalTooltip.classList.add("visible");
+  positionFloatingTooltip(el);
+}
+
+function hideFloatingTooltip() {
+  activeTooltipTarget = null;
+  globalTooltip.classList.remove("visible");
+}
+
+function positionFloatingTooltip(el) {
+  if (!el || activeTooltipTarget !== el) return;
+  const rect = el.getBoundingClientRect();
+  const tipRect = globalTooltip.getBoundingClientRect();
+
+  // If near top of viewport/header, place below; otherwise place above
+  const topThreshold = 75;
+  const placeBelow = (rect.top - topThreshold) < (tipRect.height + 14);
+  let top = placeBelow ? (rect.bottom + 8) : (rect.top - tipRect.height - 8);
+
+  // Center horizontally over target
+  let left = rect.left + (rect.width / 2) - (tipRect.width / 2);
+
+  // Clamp within viewport
+  const margin = 12;
+  if (left < margin) left = margin;
+  if (left + tipRect.width > window.innerWidth - margin) {
+    left = window.innerWidth - tipRect.width - margin;
+  }
+
+  globalTooltip.style.top = `${Math.round(top)}px`;
+  globalTooltip.style.left = `${Math.round(left)}px`;
+}
+
+// Global delegated mouse/focus listeners
+document.addEventListener("mouseover", e => {
+  const tipEl = e.target.closest(".info-tip");
+  if (tipEl) showFloatingTooltip(tipEl);
+});
+
+document.addEventListener("mouseout", e => {
+  const tipEl = e.target.closest(".info-tip");
+  if (tipEl && activeTooltipTarget === tipEl) hideFloatingTooltip();
+});
+
+document.addEventListener("focusin", e => {
+  const tipEl = e.target.closest(".info-tip");
+  if (tipEl) showFloatingTooltip(tipEl);
+});
+
+document.addEventListener("focusout", e => {
+  const tipEl = e.target.closest(".info-tip");
+  if (tipEl && activeTooltipTarget === tipEl) hideFloatingTooltip();
+});
+
+window.addEventListener("scroll", () => {
+  if (activeTooltipTarget) hideFloatingTooltip();
+}, { passive: true });
+
+document.addEventListener("scroll", () => {
+  if (activeTooltipTarget) hideFloatingTooltip();
+}, { passive: true, capture: true });
 </script>
 </body>
 </html>
