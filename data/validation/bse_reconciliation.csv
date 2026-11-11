@@ -151,6 +151,7 @@ trade_date,dataset,field,calculated_value,official_report_value,difference,diffe
 2026-11-06,BSE_CM_TURNOVER,total_market_turnover_crore,15770.4116,15770.4116,0.0000,0.0000%,Rupees Crore,VERIFIED,BSE CM BhavCopy vs Gross Delivery (SCBSEALL),Reconciled to 0.0000% variance against official gross delivery report.
 2026-11-08,BSE_CM_TURNOVER,total_market_turnover_crore,2685.123,2685.123,0.000,0.0000%,Rupees Crore,VERIFIED,BSE CM BhavCopy vs Gross Delivery (SCBSEALL),Reconciled to 0.0000% variance against official gross delivery report.
 2026-11-09,BSE_CM_TURNOVER,total_market_turnover_crore,9223.9296,9223.9296,0.0000,0.0000%,Rupees Crore,VERIFIED,BSE CM BhavCopy vs Gross Delivery (SCBSEALL),Reconciled to 0.0000% variance against official gross delivery report.
+2026-11-11,BSE_CM_TURNOVER,total_market_turnover_crore,12052.9977,12052.9977,0.0000,0.0000%,Rupees Crore,VERIFIED,BSE CM BhavCopy vs Gross Delivery (SCBSEALL),Reconciled to 0.0000% variance against official gross delivery report.
 2026-04-01,BSE_CM_VOLUME,traded_shares_volume,1037088361,1037088361,0,0.0000%,Shares,VERIFIED,BSE CM BhavCopy vs Gross Delivery (SCBSEALL),Traded share volume variance is 0.0000%.
 2026-04-02,BSE_CM_VOLUME,traded_shares_volume,907679072,907679072,0,0.0000%,Shares,VERIFIED,BSE CM BhavCopy vs Gross Delivery (SCBSEALL),Traded share volume variance is 0.0000%.
 2026-04-06,BSE_CM_VOLUME,traded_shares_volume,964191418,964191418,0,0.0000%,Shares,VERIFIED,BSE CM BhavCopy vs Gross Delivery (SCBSEALL),Traded share volume variance is 0.0000%.
@@ -303,6 +304,7 @@ trade_date,dataset,field,calculated_value,official_report_value,difference,diffe
 2026-11-06,BSE_CM_VOLUME,traded_shares_volume,690533034,690533034,0,0.0000%,Shares,VERIFIED,BSE CM BhavCopy vs Gross Delivery (SCBSEALL),Traded share volume variance is 0.0000%.
 2026-11-08,BSE_CM_VOLUME,traded_shares_volume,282649637,282649637,0,0.0000%,Shares,VERIFIED,BSE CM BhavCopy vs Gross Delivery (SCBSEALL),Traded share volume variance is 0.0000%.
 2026-11-09,BSE_CM_VOLUME,traded_shares_volume,483557168,483557168,0,0.0000%,Shares,VERIFIED,BSE CM BhavCopy vs Gross Delivery (SCBSEALL),Traded share volume variance is 0.0000%.
+2026-11-11,BSE_CM_VOLUME,traded_shares_volume,664022152,664022152,0,0.0000%,Shares,VERIFIED,BSE CM BhavCopy vs Gross Delivery (SCBSEALL),Traded share volume variance is 0.0000%.
 2026-04-01,BSE_FO_IO,call_put_premium_additivity,43456.7329,43456.733,-0.0001,0.000000%,Rupees Crore,VERIFIED,BSE MS_<date>-01 Market Summary CE/PE Partition,Exact mathematical additivity between Call and Put option premiums.
 2026-04-01,BSE_FO_SO,call_put_premium_additivity,0.0035,0.0035,0.0000,0.000000%,Rupees Crore,VERIFIED,BSE MS_<date>-01 Market Summary CE/PE Partition,Exact mathematical additivity between Call and Put option premiums.
 2026-04-02,BSE_FO_IO,call_put_premium_additivity,85211.3538,85211.3538,0.0000,0.000000%,Rupees Crore,VERIFIED,BSE MS_<date>-01 Market Summary CE/PE Partition,Exact mathematical additivity between Call and Put option premiums.
@@ -607,6 +609,8 @@ trade_date,dataset,field,calculated_value,official_report_value,difference,diffe
 2026-11-08,BSE_FO_SO,call_put_premium_additivity,0.002,0.002,0.000,0.000000%,Rupees Crore,VERIFIED,BSE MS_<date>-01 Market Summary CE/PE Partition,Exact mathematical additivity between Call and Put option premiums.
 2026-11-09,BSE_FO_IO,call_put_premium_additivity,5916.325,5916.3251,-0.0001,0.000002%,Rupees Crore,VERIFIED,BSE MS_<date>-01 Market Summary CE/PE Partition,Exact mathematical additivity between Call and Put option premiums.
 2026-11-09,BSE_FO_SO,call_put_premium_additivity,0.0024,0.0024,0.0000,0.000000%,Rupees Crore,VERIFIED,BSE MS_<date>-01 Market Summary CE/PE Partition,Exact mathematical additivity between Call and Put option premiums.
+2026-11-11,BSE_FO_IO,call_put_premium_additivity,54960.6883,54960.6884,-0.0001,0.000000%,Rupees Crore,VERIFIED,BSE MS_<date>-01 Market Summary CE/PE Partition,Exact mathematical additivity between Call and Put option premiums.
+2026-11-11,BSE_FO_SO,call_put_premium_additivity,0.0067,0.0067,0.0000,0.000000%,Rupees Crore,VERIFIED,BSE MS_<date>-01 Market Summary CE/PE Partition,Exact mathematical additivity between Call and Put option premiums.
 2026-04-03,CALENDAR,trading_status,NO_TRADING,Official Holiday: Good Friday,0,0.0000%,Calendar Date,VERIFIED,BSE Holiday Calendar 2026,Confirmed exchange closure for Good Friday.
 2026-04-04,CALENDAR,trading_status,NO_TRADING,Standard Weekend (Saturday),0,0.0000%,Calendar Date,VERIFIED,BSE Holiday Calendar 2026,Valid non-trading weekend session.
 2026-04-05,CALENDAR,trading_status,NO_TRADING,Standard Weekend (Sunday),0,0.0000%,Calendar Date,VERIFIED,BSE Holiday Calendar 2026,Valid non-trading weekend session.

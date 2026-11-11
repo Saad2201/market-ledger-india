@@ -26,7 +26,7 @@ import json
 import subprocess
 import sys
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -35,7 +35,7 @@ IST = ZoneInfo("Asia/Kolkata")
 
 def log(msg: str):
     ts = datetime.now(IST).strftime("%Y-%m-%d %H:%M:%S IST")
-    print(f"[{ts}] {msg}")
+    print(f"[{ts}] {msg}", flush=True)
 
 def run_step(step_name: str, script_name: str, args: list[str] = None) -> bool:
     log(f"--- Starting: {step_name} ({script_name}) ---")
@@ -49,23 +49,28 @@ def run_step(step_name: str, script_name: str, args: list[str] = None) -> bool:
         cmd.extend(args)
 
     t0 = time.time()
-    res = subprocess.run(cmd, cwd=str(ROOT), capture_output=True, text=True)
+    process = subprocess.Popen(
+        cmd,
+        cwd=str(ROOT),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+        bufsize=1,
+    )
+    if process.stdout:
+        for line in iter(process.stdout.readline, ''):
+            line_str = line.rstrip()
+            if line_str:
+                print(f"   | {line_str}", flush=True)
+        process.stdout.close()
+    returncode = process.wait()
     elapsed = time.time() - t0
 
-    if res.returncode == 0:
+    if returncode == 0:
         log(f"PASSED: {step_name} in {elapsed:.2f}s")
-        if res.stdout.strip():
-            for line in res.stdout.strip().splitlines()[-6:]:
-                print(f"   | {line}")
         return True
     else:
-        log(f"FAILED: {step_name} (exit code {res.returncode})")
-        if res.stderr.strip():
-            for line in res.stderr.strip().splitlines()[-10:]:
-                print(f"   [ERR] {line}")
-        elif res.stdout.strip():
-            for line in res.stdout.strip().splitlines()[-10:]:
-                print(f"   [OUT] {line}")
+        log(f"FAILED: {step_name} (exit code {returncode}) in {elapsed:.2f}s")
         return False
 
 def main():
@@ -82,8 +87,9 @@ def main():
     steps = []
 
     if args.fetch:
-        steps.append(("Fetch BSE Daily Data", "bse_fetch.py", ["--datasets", "cm_bhav", "fo_summary", "delivery"]))
-        steps.append(("Fetch NSE Daily Data", "nse_fetch.py", []))
+        lookback_date = (datetime.now(IST).date() - timedelta(days=5)).isoformat()
+        steps.append(("Fetch BSE Daily Data", "bse_fetch.py", ["--start", lookback_date, "--datasets", "cm_bhav", "fo_summary", "delivery"]))
+        steps.append(("Fetch NSE Daily Data", "nse_fetch.py", ["--start", lookback_date]))
 
     steps.extend([
         ("Validate NSE Datasets", "nse_validate_datasets.py", []),
@@ -100,6 +106,13 @@ def main():
 
     all_passed = True
     for step_desc, script, script_args in steps:
+        if step_desc.startswith("Fetch"):
+            # Live exchange download step: log warnings gracefully on cloud IP blocking
+            success = run_step(step_desc, script, script_args)
+            if not success:
+                log(f"WARNING: {step_desc} encountered network issues (e.g. cloud runner IP rate-limiting). Continuing pipeline with existing verified data.")
+            continue
+
         if script.startswith("-m "):
             # Python module invocation
             cmd = [sys.executable] + script.split()
@@ -111,10 +124,10 @@ def main():
                 log(f"PASSED: {step_desc} in {elapsed:.2f}s")
                 if res.stderr.strip():
                     for line in res.stderr.strip().splitlines()[-4:]:
-                        print(f"   | {line}")
+                        print(f"   | {line}", flush=True)
             else:
                 log(f"FAILED: {step_desc} (exit code {res.returncode})")
-                print(res.stderr)
+                print(res.stderr, flush=True)
                 all_passed = False
                 break
         else:
@@ -133,7 +146,7 @@ def main():
         if fy_path.exists():
             with open(fy_path, "r", encoding="utf-8-sig") as f:
                 row = next(csv.DictReader(f))
-                days_count = row.get("trading_days", "152")
+                days_count = row.get("trading_days", "153")
                 log(f"EXECUTIVE SUMMARY ({days_count} Trading Days):")
                 log(f"  • Total Market Turnover:     ₹{float(row['total_market_turnover_cr']):,.2f} Cr")
                 log(f"  • Central Gov STT:           ₹{float(row['central_gov_revenue_cr']):,.2f} Cr")

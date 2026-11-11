@@ -107,7 +107,7 @@ def make_session() -> requests.Session:
     s = requests.Session()
     s.headers.update(HEADERS)
     try:
-        s.get("https://www.nseindia.com/", timeout=20)
+        s.get("https://www.nseindia.com/", timeout=10)
     except requests.RequestException:
         pass
     return s
@@ -117,7 +117,7 @@ def fetch(session: requests.Session, url: str, kind: str, retries: int = 3):
     last_note = ""
     for attempt in range(1, retries + 1):
         try:
-            response = session.get(url, timeout=50)
+            response = session.get(url, timeout=15)
             content = response.content
             ctype = response.headers.get("Content-Type", "")
             if response.status_code == 404:

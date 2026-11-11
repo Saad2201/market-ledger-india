@@ -123,12 +123,12 @@ def make_session() -> requests.Session:
     s = requests.Session()
     s.headers.update(HEADERS)
     try:
-        s.get("https://www.bseindia.com/", timeout=30)
+        s.get("https://www.bseindia.com/", timeout=10)
     except requests.RequestException as e:
         print(f"[warn] warm-up request failed: {e}", file=sys.stderr)
     return s
 
-def fetch(session, url, ext, headers=None, retries=3, timeout=45):
+def fetch(session, url, ext, headers=None, retries=3, timeout=15):
     note = ""
     for attempt in range(1, retries + 1):
         try:
