@@ -5,8 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>MarketLedger — Indian Stock Market Revenue & Tax Intelligence</title>
 <meta name="description" content="Auditable daily, monthly, and financial-year estimates of statutory revenue (STT, Stamp Duty, GST, SEBI Fees) generated from Indian stock market transactions across NSE and BSE.">
+<script>
+(function() {
+  const t = localStorage.getItem("ml_theme");
+  if (t) document.documentElement.setAttribute("data-theme", t);
+})();
+</script>
 <style>
 :root {
+  color-scheme: light;
   --sidebar-bg: #0b1325;
   --sidebar-border: #18233a;
   --sidebar-text: #94a3b8;
@@ -45,6 +52,7 @@
 }
 
 [data-theme="dark"] {
+  color-scheme: dark;
   --bg: #090d16;
   --surface: #111827;
   --surface-hover: #1f2937;
@@ -508,6 +516,52 @@ body {
 
 .select-ctrl:focus {
   border-color: var(--accent-blue);
+}
+
+/* Dropdown native styling & theme support */
+select {
+  color-scheme: light;
+}
+
+[data-theme="dark"] select {
+  color-scheme: dark;
+}
+
+select option {
+  background-color: var(--surface);
+  color: var(--text);
+  padding: 8px 12px;
+}
+
+[data-theme="dark"] select option,
+[data-theme="dark"] .date-display-input option,
+[data-theme="dark"] .select-ctrl option {
+  background-color: #111827 !important;
+  color: #f9fafb !important;
+}
+
+[data-theme="light"] select option,
+[data-theme="light"] .date-display-input option,
+[data-theme="light"] .select-ctrl option {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+}
+
+[data-theme="dark"] .date-nav-ctrl {
+  background: #111827;
+  border-color: #1f2937;
+}
+
+[data-theme="dark"] .select-ctrl {
+  background: #111827;
+  border-color: #1f2937;
+  color: #f9fafb;
+}
+
+[data-theme="dark"] .table-search {
+  background: #111827;
+  border-color: #1f2937;
+  color: #f9fafb;
 }
 
 /* Date Context Heading */
@@ -1641,12 +1695,18 @@ function initApp() {
     if (e.target.id === "coverageModal") $("#coverageModal").classList.remove("active");
   });
 
-  // Theme Toggle
+  // Theme Toggle with local persistence
   const themeToggle = $("#themeToggle");
+  const savedTheme = localStorage.getItem("ml_theme");
+  if (savedTheme) {
+    document.documentElement.setAttribute("data-theme", savedTheme);
+  }
+
   themeToggle.addEventListener("click", () => {
     const cur = document.documentElement.getAttribute("data-theme") || "light";
     const next = cur === "dark" ? "light" : "dark";
     document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("ml_theme", next);
   });
 
   // Export Buttons
