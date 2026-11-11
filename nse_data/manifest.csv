@@ -684,3 +684,8 @@ trade_date,dataset,status,url,bytes,sha256,saved_file,fetched_at_ist,note
 2026-11-12,cm_udiff,missing,https://nsearchives.nseindia.com/content/cm/BhavCopy_NSE_CM_0_0_0_20261112_F_0000.csv.zip,0,,,2026-11-12T00:21:04+05:30,HTTP 404 (text/html;charset=UTF-8)
 2026-11-12,fo_udiff,missing,https://nsearchives.nseindia.com/content/fo/BhavCopy_NSE_FO_0_0_0_20261112_F_0000.csv.zip,0,,,2026-11-12T00:21:04+05:30,HTTP 404 (text/html;charset=UTF-8)
 2026-11-12,cm_security_delivery,missing,https://nsearchives.nseindia.com/products/content/sec_bhavdata_full_12112026.csv,0,,,2026-11-12T00:21:05+05:30,HTTP 404 (text/html;charset=UTF-8)
+2026-11-10,cm_udiff,missing,https://nsearchives.nseindia.com/content/cm/BhavCopy_NSE_CM_0_0_0_20261110_F_0000.csv.zip,0,,,2026-11-12T01:30:09+05:30,HTTP 404 (text/html;charset=UTF-8)
+2026-11-10,fo_udiff,missing,https://nsearchives.nseindia.com/content/fo/BhavCopy_NSE_FO_0_0_0_20261110_F_0000.csv.zip,0,,,2026-11-12T01:30:10+05:30,HTTP 404 (text/html;charset=UTF-8)
+2026-11-12,cm_udiff,missing,https://nsearchives.nseindia.com/content/cm/BhavCopy_NSE_CM_0_0_0_20261112_F_0000.csv.zip,0,,,2026-11-12T01:30:11+05:30,HTTP 404 (text/html;charset=UTF-8)
+2026-11-12,fo_udiff,missing,https://nsearchives.nseindia.com/content/fo/BhavCopy_NSE_FO_0_0_0_20261112_F_0000.csv.zip,0,,,2026-11-12T01:30:11+05:30,HTTP 404 (text/html;charset=UTF-8)
+2026-11-12,cm_security_delivery,missing,https://nsearchives.nseindia.com/products/content/sec_bhavdata_full_12112026.csv,0,,,2026-11-12T01:30:12+05:30,HTTP 404 (text/html;charset=UTF-8)
