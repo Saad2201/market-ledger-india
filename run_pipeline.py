@@ -82,7 +82,7 @@ def main():
     steps = []
 
     if args.fetch:
-        steps.append(("Fetch BSE Daily Data", "bse_fetch.py", ["--datasets", "cm_bhav", "fo_summary", "delivery", "--site-dir", "docs"]))
+        steps.append(("Fetch BSE Daily Data", "bse_fetch.py", ["--datasets", "cm_bhav", "fo_summary", "delivery"]))
         steps.append(("Fetch NSE Daily Data", "nse_fetch.py", []))
 
     steps.extend([

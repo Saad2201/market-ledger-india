@@ -456,8 +456,8 @@ def write_site_data(site_dir: Path, fo_rows, del_rows, cash_rows):
         "updated": datetime.now(IST).isoformat(timespec="minutes"),
         "days": [{"d": d, **v} for d, v in sorted(days.items())],
     }
-    (site_dir / "data.json").write_text(json.dumps(payload), encoding="utf-8")
-    print(f"wrote {site_dir / 'data.json'}  ({len(days)} days)")
+    (site_dir / "bse_summary.json").write_text(json.dumps(payload), encoding="utf-8")
+    print(f"wrote {site_dir / 'bse_summary.json'}  ({len(days)} days)")
 
 def summarize(out_dir: Path, site_dir: Path = None):
     raw = out_dir / "raw"

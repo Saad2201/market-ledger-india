@@ -363,7 +363,7 @@ def process_all_bse_dates():
     ]
     write_csv(BSE_DATA / "daily_fo.csv", bse_fo_rows, list(bse_fo_rows[0].keys()))
 
-    # Update docs/data.json
+    # Write legacy BSE-only site payload to bse_data/bse_summary.json (preserves docs/data.json for master pipeline)
     days_payload = []
     del_map = {r["trade_date"]: r for r in delivery_summary_rows}
     for r in daily_summary_rows:
@@ -382,8 +382,8 @@ def process_all_bse_dates():
         "updated": datetime.now().strftime("%Y-%m-%dT%H:%M+05:30"),
         "days": days_payload,
     }
-    (ROOT / "docs" / "data.json").write_text(json.dumps(site_payload), encoding="utf-8")
-    print(f"Updated: {ROOT / 'docs' / 'data.json'} ({len(days_payload)} days)")
+    (BSE_DATA / "bse_summary.json").write_text(json.dumps(site_payload), encoding="utf-8")
+    print(f"Updated: {BSE_DATA / 'bse_summary.json'} ({len(days_payload)} days)")
 
 if __name__ == "__main__":
     process_all_bse_dates()
