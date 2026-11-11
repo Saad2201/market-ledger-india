@@ -518,13 +518,21 @@ body {
   border-color: var(--accent-blue);
 }
 
-/* Dropdown native styling & theme support */
-select {
-  color-scheme: light;
+/* Dropdown & Popover styling with full theme support */
+html[data-theme="dark"],
+html[data-theme="dark"] body {
+  color-scheme: dark !important;
 }
 
-[data-theme="dark"] select {
-  color-scheme: dark;
+html[data-theme="light"],
+html[data-theme="light"] body {
+  color-scheme: light !important;
+}
+
+select {
+  color-scheme: inherit;
+  background-color: var(--surface);
+  color: var(--text);
 }
 
 select option {
@@ -533,18 +541,14 @@ select option {
   padding: 8px 12px;
 }
 
-[data-theme="dark"] select option,
-[data-theme="dark"] .date-display-input option,
-[data-theme="dark"] .select-ctrl option {
-  background-color: #111827 !important;
-  color: #f9fafb !important;
+[data-theme="dark"] select option {
+  background-color: #111827;
+  color: #f9fafb;
 }
 
-[data-theme="light"] select option,
-[data-theme="light"] .date-display-input option,
-[data-theme="light"] .select-ctrl option {
-  background-color: #ffffff !important;
-  color: #0f172a !important;
+[data-theme="light"] select option {
+  background-color: #ffffff;
+  color: #0f172a;
 }
 
 [data-theme="dark"] .date-nav-ctrl {
@@ -562,6 +566,152 @@ select option {
   background: #111827;
   border-color: #1f2937;
   color: #f9fafb;
+}
+
+/* Custom Date Picker Popover */
+.date-display-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  font-family: var(--font-mono);
+  cursor: pointer;
+  height: 100%;
+  padding: 0 10px;
+  outline: none;
+  transition: background-color 0.15s ease;
+}
+
+.date-display-btn:hover {
+  background: var(--surface-hover);
+}
+
+.date-popover {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  width: 320px;
+  max-width: 95vw;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+  z-index: 150;
+  padding: 12px;
+}
+
+.date-popover.open {
+  display: block;
+  animation: popoverFadeIn 0.15s ease-out;
+}
+
+@keyframes popoverFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.date-popover-header {
+  margin-bottom: 8px;
+}
+
+.date-search-input {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 7px 10px;
+  font-size: 12px;
+  color: var(--text);
+  outline: none;
+  font-family: var(--font-sans);
+}
+
+.date-search-input:focus {
+  border-color: var(--accent-blue);
+}
+
+.month-pills-bar {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--border-subtle);
+  scrollbar-width: none;
+}
+
+.month-pill {
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--bg);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  white-space: nowrap;
+  transition: all 0.12s ease;
+}
+
+.month-pill:hover,
+.month-pill.active {
+  background: var(--accent-blue);
+  color: #ffffff;
+  border-color: var(--accent-blue);
+}
+
+.date-popover-list {
+  max-height: 240px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.date-option-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  color: var(--text);
+  transition: background-color 0.1s ease;
+  font-family: var(--font-mono);
+}
+
+.date-option-item:hover {
+  background: var(--surface-hover);
+}
+
+.date-option-item.selected {
+  background: rgba(37, 99, 235, 0.15);
+  color: var(--accent-blue);
+  font-weight: 700;
+}
+
+[data-theme="dark"] .date-option-item.selected {
+  background: rgba(59, 130, 246, 0.22);
+  color: #60a5fa;
+}
+
+.date-item-tag {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: var(--font-sans);
 }
 
 /* Date Context Heading */
@@ -1371,12 +1521,28 @@ tr:hover td {
 
       <!-- Filters Card -->
       <div class="filter-card">
-        <div class="filter-group">
+        <div class="filter-group" style="position: relative;">
           <label class="filter-label">Trading date</label>
           <div class="date-nav-ctrl">
             <button class="date-nav-btn" id="btnPrevDate" title="Previous Trading Day">‹</button>
-            <select class="date-display-input" id="selectTradingDate"></select>
+            <button class="date-display-btn" id="btnDateDropdown" type="button" title="Click to choose a trading date">
+              <span id="dateDisplayText">2026-11-09</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
             <button class="date-nav-btn" id="btnNextDate" title="Next Trading Day">›</button>
+          </div>
+
+          <!-- Custom Date Picker Dropdown Popover -->
+          <div class="date-popover" id="datePickerPopover">
+            <div class="date-popover-header">
+              <input type="text" class="date-search-input" id="dateSearchInput" placeholder="Filter date (e.g. Nov, 2026-10, Friday)...">
+            </div>
+            <div class="month-pills-bar" id="monthPillsBar">
+              <!-- Injected by JS -->
+            </div>
+            <div class="date-popover-list" id="datePopoverList">
+              <!-- Injected by JS -->
+            </div>
           </div>
         </div>
 
@@ -1807,12 +1973,32 @@ function initApp() {
   $("#sidebarLatestDate").textContent = `Latest: ${formatDate(latestDate)}`;
   $("#topLatestReport").textContent = `Latest report · ${formatDate(latestDate)}`;
 
-  // Populate Date Select
-  const dateSelect = $("#selectTradingDate");
-  dateSelect.innerHTML = DATA.daily_records.map((r, i) => `
-    <option value="${i}">${r.trade_date}</option>
-  `).join("");
-  dateSelect.value = currentDayIdx;
+  // Initialize Date Display & Popover
+  updateDateDisplay();
+  buildDatePopover();
+
+  // Toggle Date Popover
+  const dateDropdownBtn = $("#btnDateDropdown");
+  const datePopover = $("#datePickerPopover");
+
+  dateDropdownBtn.addEventListener("click", e => {
+    e.stopPropagation();
+    datePopover.classList.toggle("open");
+    if (datePopover.classList.contains("open")) {
+      $("#dateSearchInput").focus();
+    }
+  });
+
+  // Close Popover on Outside Click or Escape
+  document.addEventListener("click", e => {
+    if (!datePopover.contains(e.target) && e.target !== dateDropdownBtn) {
+      datePopover.classList.remove("open");
+    }
+  });
+
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") datePopover.classList.remove("open");
+  });
 
   // Wire Tab Switching
   $$(".nav-item").forEach(item => {
@@ -1827,25 +2013,12 @@ function initApp() {
   });
 
   // Wire Filters
-  dateSelect.addEventListener("change", e => {
-    currentDayIdx = parseInt(e.target.value, 10);
-    renderOverview();
-  });
-
   $("#btnPrevDate").addEventListener("click", () => {
-    if (currentDayIdx > 0) {
-      currentDayIdx--;
-      dateSelect.value = currentDayIdx;
-      renderOverview();
-    }
+    if (currentDayIdx > 0) selectDate(currentDayIdx - 1);
   });
 
   $("#btnNextDate").addEventListener("click", () => {
-    if (currentDayIdx < DATA.daily_records.length - 1) {
-      currentDayIdx++;
-      dateSelect.value = currentDayIdx;
-      renderOverview();
-    }
+    if (currentDayIdx < DATA.daily_records.length - 1) selectDate(currentDayIdx + 1);
   });
 
   $("#selectExchange").addEventListener("change", renderOverview);
@@ -1853,8 +2026,7 @@ function initApp() {
   $("#selectHistory").addEventListener("change", renderOverview);
 
   $("#btnRefresh").addEventListener("click", () => {
-    currentDayIdx = DATA.daily_records.length - 1;
-    dateSelect.value = currentDayIdx;
+    selectDate(DATA.daily_records.length - 1);
     $("#selectExchange").value = "ALL";
     $("#selectSegment").value = "ALL";
     $("#selectHistory").value = "MTD";
@@ -1868,18 +2040,18 @@ function initApp() {
     if (e.target.id === "coverageModal") $("#coverageModal").classList.remove("active");
   });
 
-  // Theme Toggle with local persistence
-  const themeToggle = $("#themeToggle");
-  const savedTheme = localStorage.getItem("ml_theme");
-  if (savedTheme) {
-    document.documentElement.setAttribute("data-theme", savedTheme);
-  }
+  // Theme Toggle with LocalStorage Persistence
+  const savedTheme = localStorage.getItem("ml_theme") || "light";
+  document.documentElement.setAttribute("data-theme", savedTheme);
+  updateThemeIcon(savedTheme);
 
+  const themeToggle = $("#themeToggle");
   themeToggle.addEventListener("click", () => {
     const cur = document.documentElement.getAttribute("data-theme") || "light";
     const next = cur === "dark" ? "light" : "dark";
     document.documentElement.setAttribute("data-theme", next);
     localStorage.setItem("ml_theme", next);
+    updateThemeIcon(next);
   });
 
   // Export Buttons
@@ -1897,6 +2069,117 @@ function initApp() {
   renderMethodologyRates();
 }
 
+let activeMonthFilter = "ALL";
+
+function updateDateDisplay() {
+  const r = DATA.daily_records[currentDayIdx];
+  if (!r) return;
+  $("#dateDisplayText").textContent = r.trade_date;
+}
+
+function selectDate(idx) {
+  if (idx < 0 || idx >= DATA.daily_records.length) return;
+  currentDayIdx = idx;
+  updateDateDisplay();
+  highlightSelectedDateItem();
+  renderOverview();
+  $("#datePickerPopover").classList.remove("open");
+}
+
+function highlightSelectedDateItem() {
+  $$(".date-option-item").forEach(item => {
+    const i = parseInt(item.dataset.idx, 10);
+    if (i === currentDayIdx) {
+      item.classList.add("selected");
+    } else {
+      item.classList.remove("selected");
+    }
+  });
+}
+
+function buildDatePopover() {
+  const monthsSet = new Set();
+  DATA.daily_records.forEach(r => {
+    monthsSet.add(r.trade_date.slice(0, 7));
+  });
+  const months = Array.from(monthsSet).reverse();
+
+  const pillsBar = $("#monthPillsBar");
+  pillsBar.innerHTML = `<button type="button" class="month-pill active" data-month="ALL">All</button>` +
+    months.map(m => {
+      const parts = m.split("-");
+      const mNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+      const label = `${mNames[parseInt(parts[1], 10) - 1]} '${parts[0].slice(2)}`;
+      return `<button type="button" class="month-pill" data-month="${m}">${label}</button>`;
+    }).join("");
+
+  $$(".month-pill").forEach(btn => {
+    btn.addEventListener("click", () => {
+      $$(".month-pill").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      activeMonthFilter = btn.dataset.month;
+      filterDatePopover();
+    });
+  });
+
+  $("#dateSearchInput").addEventListener("input", filterDatePopover);
+
+  renderDatePopoverList(DATA.daily_records.map((r, i) => ({ ...r, idx: i })).reverse());
+}
+
+function filterDatePopover() {
+  const query = $("#dateSearchInput").value.trim().toLowerCase();
+  const list = DATA.daily_records.map((r, i) => ({ ...r, idx: i })).reverse();
+
+  const filtered = list.filter(r => {
+    if (activeMonthFilter !== "ALL" && !r.trade_date.startsWith(activeMonthFilter)) return false;
+    if (query) {
+      const matchDate = r.trade_date.includes(query);
+      const formatted = formatDate(r.trade_date).toLowerCase();
+      const matchFmt = formatted.includes(query);
+      const matchNotes = (r.notes || "").toLowerCase().includes(query);
+      if (!matchDate && !matchFmt && !matchNotes) return false;
+    }
+    return true;
+  });
+
+  renderDatePopoverList(filtered);
+}
+
+function renderDatePopoverList(records) {
+  const container = $("#datePopoverList");
+  if (!records.length) {
+    container.innerHTML = `<div style="padding:16px; text-align:center; font-size:12px; color:var(--text-muted)">No matching dates</div>`;
+    return;
+  }
+
+  container.innerHTML = records.map(r => {
+    const isSelected = r.idx === currentDayIdx ? "selected" : "";
+    const isSpecial = r.notes && r.notes.toLowerCase().includes("muhurat") ? "Muhurat" : "";
+    return `
+      <div class="date-option-item ${isSelected}" data-idx="${r.idx}">
+        <div>
+          <strong>${r.trade_date}</strong>
+          <span style="font-size:11px; color:var(--text-muted); margin-left:6px;">${getDayName(r.trade_date)}</span>
+        </div>
+        ${isSpecial ? `<span class="date-item-tag" style="color:#d97706; border-color:#d97706;">${isSpecial}</span>` : ""}
+      </div>
+    `;
+  }).join("");
+
+  $$(".date-option-item").forEach(item => {
+    item.addEventListener("click", () => {
+      selectDate(parseInt(item.dataset.idx, 10));
+    });
+  });
+}
+
+function getDayName(isoStr) {
+  const parts = isoStr.split("-");
+  const d = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+  return d.toLocaleDateString("en-US", { weekday: "short" });
+}
+
 function formatDate(isoStr) {
   if (!isoStr) return "";
   const parts = isoStr.split("-");
@@ -1907,9 +2190,36 @@ function formatDate(isoStr) {
   return `${d} ${m} ${parts[0]}`;
 }
 
+function updateThemeIcon(theme) {
+  const btn = $("#themeToggle");
+  if (!btn) return;
+  if (theme === "dark") {
+    btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>`;
+    btn.title = "Switch to Light Theme";
+  } else {
+    btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </svg>`;
+    btn.title = "Switch to Dark Theme";
+  }
+}
+
 function renderOverview() {
   const r = DATA.daily_records[currentDayIdx];
   if (!r) return;
+
+  updateDateDisplay();
+  highlightSelectedDateItem();
 
   const exch = $("#selectExchange").value;
   const seg = $("#selectSegment").value;
