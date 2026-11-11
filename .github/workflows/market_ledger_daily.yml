@@ -15,7 +15,7 @@ permissions:
 
 concurrency:
   group: "market-ledger-update"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   update-ledger:
