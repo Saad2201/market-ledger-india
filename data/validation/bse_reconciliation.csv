@@ -611,6 +611,8 @@ trade_date,dataset,field,calculated_value,official_report_value,difference,diffe
 2026-11-09,BSE_FO_SO,call_put_premium_additivity,0.0024,0.0024,0.0000,0.000000%,Rupees Crore,VERIFIED,BSE MS_<date>-01 Market Summary CE/PE Partition,Exact mathematical additivity between Call and Put option premiums.
 2026-11-11,BSE_FO_IO,call_put_premium_additivity,54960.6883,54960.6884,-0.0001,0.000000%,Rupees Crore,VERIFIED,BSE MS_<date>-01 Market Summary CE/PE Partition,Exact mathematical additivity between Call and Put option premiums.
 2026-11-11,BSE_FO_SO,call_put_premium_additivity,0.0067,0.0067,0.0000,0.000000%,Rupees Crore,VERIFIED,BSE MS_<date>-01 Market Summary CE/PE Partition,Exact mathematical additivity between Call and Put option premiums.
+2026-11-12,BSE_FO_IO,call_put_premium_additivity,67040.154,67040.1540,0.0000,0.000000%,Rupees Crore,VERIFIED,BSE MS_<date>-01 Market Summary CE/PE Partition,Exact mathematical additivity between Call and Put option premiums.
+2026-11-12,BSE_FO_SO,call_put_premium_additivity,0.014,0.0141,-0.0001,0.714286%,Rupees Crore,VERIFIED,BSE MS_<date>-01 Market Summary CE/PE Partition,Exact mathematical additivity between Call and Put option premiums.
 2026-04-03,CALENDAR,trading_status,NO_TRADING,Official Holiday: Good Friday,0,0.0000%,Calendar Date,VERIFIED,BSE Holiday Calendar 2026,Confirmed exchange closure for Good Friday.
 2026-04-04,CALENDAR,trading_status,NO_TRADING,Standard Weekend (Saturday),0,0.0000%,Calendar Date,VERIFIED,BSE Holiday Calendar 2026,Valid non-trading weekend session.
 2026-04-05,CALENDAR,trading_status,NO_TRADING,Standard Weekend (Sunday),0,0.0000%,Calendar Date,VERIFIED,BSE Holiday Calendar 2026,Valid non-trading weekend session.
