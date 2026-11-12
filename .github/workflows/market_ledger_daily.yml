@@ -2,10 +2,10 @@ name: Daily Market Ledger Ingestion & Deployment
 
 on:
   schedule:
-    # 19:30 IST (14:00 UTC) Monday-Friday - Post-market daily BhavCopy release
-    - cron: '0 14 * * 1-5'
-    # 22:30 IST (17:00 UTC) Monday-Friday - Nightly reconciliation & catch-up run
-    - cron: '0 17 * * 1-5'
+    # 20:05 IST (14:35 UTC) Monday-Friday - Post-market BhavCopy release (off-peak minute avoids GitHub top-of-hour congestion)
+    - cron: '35 14 * * 1-5'
+    # 22:45 IST (17:15 UTC) Monday-Friday - Nightly reconciliation & catch-up run
+    - cron: '15 17 * * 1-5'
   workflow_dispatch: # Allows manual one-click trigger from GitHub Actions UI
 
 permissions:
