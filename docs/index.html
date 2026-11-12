@@ -2252,7 +2252,29 @@ const fmtNum = (val, d = 2) => {
 };
 
 // Initialize Application
-if (typeof window.MARKET_DATA !== "undefined" && window.MARKET_DATA) {
+const isLocalFile = window.location.protocol === "file:";
+
+if (!isLocalFile) {
+  // On web (GitHub Pages), fetch fresh data.json with cache-busting timestamp to bypass CDN/browser cache
+  fetch("data.json?v=" + Date.now(), { cache: "no-store" })
+    .then(r => r.json())
+    .then(json => {
+      DATA = json;
+      initApp();
+    })
+    .catch(err => {
+      console.warn("Live fetch failed, falling back to static data:", err);
+      if (typeof window.MARKET_DATA !== "undefined" && window.MARKET_DATA) {
+        DATA = window.MARKET_DATA;
+        initApp();
+      } else {
+        $(".workspace-content").innerHTML = `<div style="padding:60px 20px; text-align:center; color:var(--danger)">
+          <h2>Unable to load market data feed</h2>
+          <p style="margin-top:8px; color:var(--text-muted)">Ensure docs/data.js or docs/data.json is present in the repository.</p>
+        </div>`;
+      }
+    });
+} else if (typeof window.MARKET_DATA !== "undefined" && window.MARKET_DATA) {
   DATA = window.MARKET_DATA;
   initApp();
 } else {
