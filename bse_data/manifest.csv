@@ -706,3 +706,12 @@ date,dataset,status,url,bytes,fetched_at
 2026-11-14,cm_bhav,missing,https://www.bseindia.com/download/BhavCopy/Equity/BhavCopy_BSE_CM_0_0_0_20261114_F_0000.CSV,0,2026-11-14T04:07:00+05:30
 2026-11-14,fo_summary,missing,https://www.bseindia.com/download/BhavCopy/Derivative/MS_20261114-01.csv,0,2026-11-14T04:07:02+05:30
 2026-11-14,delivery,missing,https://www.bseindia.com/BSEDATA/gross/2026/SCBSEALL1411.zip,0,2026-11-14T04:07:05+05:30
+2026-11-15,cm_bhav,missing,https://www.bseindia.com/download/BhavCopy/Equity/BhavCopy_BSE_CM_0_0_0_20261115_F_0000.CSV,0,2026-11-17T04:59:50+05:30
+2026-11-15,fo_summary,missing,https://www.bseindia.com/download/BhavCopy/Derivative/MS_20261115-01.csv,0,2026-11-17T04:59:52+05:30
+2026-11-15,delivery,missing,https://www.bseindia.com/BSEDATA/gross/2026/SCBSEALL1511.zip,0,2026-11-17T04:59:55+05:30
+2026-11-16,cm_bhav,ok,https://www.bseindia.com/download/BhavCopy/Equity/BhavCopy_BSE_CM_0_0_0_20261116_F_0000.CSV,909890,2026-11-17T04:59:57+05:30
+2026-11-16,fo_summary,ok,https://www.bseindia.com/download/BhavCopy/Derivative/MS_20261116-01.csv,179921,2026-11-17T04:59:59+05:30
+2026-11-16,delivery,ok,https://www.bseindia.com/BSEDATA/gross/2026/SCBSEALL1611.zip,106481,2026-11-17T05:00:01+05:30
+2026-11-17,cm_bhav,missing,https://www.bseindia.com/download/BhavCopy/Equity/BhavCopy_BSE_CM_0_0_0_20261117_F_0000.CSV,0,2026-11-17T05:00:03+05:30
+2026-11-17,fo_summary,missing,https://www.bseindia.com/download/BhavCopy/Derivative/MS_20261117-01.csv,0,2026-11-17T05:00:05+05:30
+2026-11-17,delivery,missing,https://www.bseindia.com/BSEDATA/gross/2026/SCBSEALL1711.zip,0,2026-11-17T05:00:08+05:30
