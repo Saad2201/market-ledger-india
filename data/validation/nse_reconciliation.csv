@@ -157,6 +157,7 @@ trade_date,dataset,field,calculated_value,official_report_value,difference,diffe
 2026-11-16,CM_TURNOVER,total_market_turnover_crore,112229.4955,112222.15,7.3455,0.0065%,Rupees Crore,VERIFIED,CM UDiFF vs sec_bhavdata_full (+ BL Block Deals),Reconciled within statutory tolerance (0.0065%).
 2026-11-17,CM_TURNOVER,total_market_turnover_crore,121025.073,121016.2627,8.8103,0.0073%,Rupees Crore,VERIFIED,CM UDiFF vs sec_bhavdata_full (+ BL Block Deals),Includes Rs 2691.59 Cr block deal window volume (BL series). Reconciled within 0.0073%.
 2026-11-18,CM_TURNOVER,total_market_turnover_crore,108341.9664,108334.2758,7.6906,0.0071%,Rupees Crore,VERIFIED,CM UDiFF vs sec_bhavdata_full (+ BL Block Deals),Reconciled within statutory tolerance (0.0071%).
+2026-11-19,CM_TURNOVER,total_market_turnover_crore,122515.4303,122508.2403,7.1900,0.0059%,Rupees Crore,VERIFIED,CM UDiFF vs sec_bhavdata_full (+ BL Block Deals),Includes Rs 1540.00 Cr block deal window volume (BL series). Reconciled within 0.0059%.
 2026-04-01,CM_VOLUME,traded_shares_volume,5417538610,5414979440,2559170,0.0472%,Shares,VERIFIED,CM UDiFF vs sec_bhavdata_full (+ BL Block Deals),Traded volume matches within odd-lot and debt reporting thresholds (0.0472%).
 2026-04-02,CM_VOLUME,traded_shares_volume,5491986658,5485514426,6472232,0.1178%,Shares,VERIFIED,CM UDiFF vs sec_bhavdata_full (+ BL Block Deals),Traded volume matches within odd-lot and debt reporting thresholds (0.1178%).
 2026-04-06,CM_VOLUME,traded_shares_volume,5136869574,5132074744,4794830,0.0933%,Shares,VERIFIED,CM UDiFF vs sec_bhavdata_full (+ BL Block Deals),Traded volume matches within odd-lot and debt reporting thresholds (0.0933%).
@@ -315,6 +316,7 @@ trade_date,dataset,field,calculated_value,official_report_value,difference,diffe
 2026-11-16,CM_VOLUME,traded_shares_volume,4535028464,4534949813,78651,0.0017%,Shares,VERIFIED,CM UDiFF vs sec_bhavdata_full (+ BL Block Deals),Traded volume matches within odd-lot and debt reporting thresholds (0.0017%).
 2026-11-17,CM_VOLUME,traded_shares_volume,4693234579,4693161580,72999,0.0016%,Shares,VERIFIED,CM UDiFF vs sec_bhavdata_full (+ BL Block Deals),Traded volume matches within odd-lot and debt reporting thresholds (0.0016%).
 2026-11-18,CM_VOLUME,traded_shares_volume,4469512261,4469427112,85149,0.0019%,Shares,VERIFIED,CM UDiFF vs sec_bhavdata_full (+ BL Block Deals),Traded volume matches within odd-lot and debt reporting thresholds (0.0019%).
+2026-11-19,CM_VOLUME,traded_shares_volume,4714143651,4714004954,138697,0.0029%,Shares,VERIFIED,CM UDiFF vs sec_bhavdata_full (+ BL Block Deals),Traded volume matches within odd-lot and debt reporting thresholds (0.0029%).
 2026-04-01,FO_IDO,call_put_premium_additivity,52771.1661,52771.1661,0.0000,0.000000%,Rupees Crore,VERIFIED,FO UDiFF CE/PE Premium Partition,Exact mathematical partition between Call and Put options.
 2026-04-01,FO_STO,call_put_premium_additivity,7876.6563,7876.6563,0.0000,0.000000%,Rupees Crore,VERIFIED,FO UDiFF CE/PE Premium Partition,Exact mathematical partition between Call and Put options.
 2026-04-02,FO_IDO,call_put_premium_additivity,52904.9372,52904.9372,0.0000,0.000000%,Rupees Crore,VERIFIED,FO UDiFF CE/PE Premium Partition,Exact mathematical partition between Call and Put options.
@@ -631,6 +633,8 @@ trade_date,dataset,field,calculated_value,official_report_value,difference,diffe
 2026-11-17,FO_STO,call_put_premium_additivity,8986.1389,8986.1389,0.0000,0.000000%,Rupees Crore,VERIFIED,FO UDiFF CE/PE Premium Partition,Exact mathematical partition between Call and Put options.
 2026-11-18,FO_IDO,call_put_premium_additivity,48051.222,48051.222,0.000,0.000000%,Rupees Crore,VERIFIED,FO UDiFF CE/PE Premium Partition,Exact mathematical partition between Call and Put options.
 2026-11-18,FO_STO,call_put_premium_additivity,7868.3212,7868.3213,-0.0001,0.000001%,Rupees Crore,VERIFIED,FO UDiFF CE/PE Premium Partition,Exact mathematical partition between Call and Put options.
+2026-11-19,FO_IDO,call_put_premium_additivity,44386.7131,44386.7131,0.0000,0.000000%,Rupees Crore,VERIFIED,FO UDiFF CE/PE Premium Partition,Exact mathematical partition between Call and Put options.
+2026-11-19,FO_STO,call_put_premium_additivity,9092.874,9092.8740,0.0000,0.000000%,Rupees Crore,VERIFIED,FO UDiFF CE/PE Premium Partition,Exact mathematical partition between Call and Put options.
 2026-04-01,FO_IDF,Index futures turnover,34738.4858,34738.485796,0.000004,0.000000%,Rupees Crore,VERIFIED,market-ledger_all_2026-04-01_2026-04-01.csv,100% exact match against verified baseline prototype.
 2026-04-01,FO_STF,Stock futures turnover,84220.0584,84220.058437,-0.000037,0.000000%,Rupees Crore,VERIFIED,market-ledger_all_2026-04-01_2026-04-01.csv,100% exact match against verified baseline prototype.
 2026-04-01,FO_IDO,Index options premium turnover,52771.1661,52771.166088,0.000012,0.000000%,Rupees Crore,VERIFIED,market-ledger_all_2026-04-01_2026-04-01.csv,100% exact match against verified baseline prototype.
