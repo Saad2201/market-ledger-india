@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-11-19T23:36:34.651329",
-  "total_checks": 707,
-  "checks_passed": 707,
+  "generated_at": "2026-11-20T21:58:28.623534",
+  "total_checks": 711,
+  "checks_passed": 711,
   "checks_flagged": 0,
   "pass_rate_pct": 100.0,
-  "total_trading_dates_reconciled": 159,
+  "total_trading_dates_reconciled": 160,
   "total_non_trading_dates_reconciled": 71,
   "special_sessions_verified": [
     "2026-11-08 (Diwali Muhurat Trading)"
