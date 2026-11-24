@@ -798,3 +798,11 @@ trade_date,dataset,status,url,bytes,sha256,saved_file,fetched_at_ist,note
 2026-11-24,cm_udiff,missing,https://nsearchives.nseindia.com/content/cm/BhavCopy_NSE_CM_0_0_0_20261124_F_0000.csv.zip,0,,,2026-11-24T08:51:16+05:30,HTTP 404 (text/html;charset=UTF-8)
 2026-11-24,fo_udiff,missing,https://nsearchives.nseindia.com/content/fo/BhavCopy_NSE_FO_0_0_0_20261124_F_0000.csv.zip,0,,,2026-11-24T08:51:17+05:30,HTTP 404 (text/html;charset=UTF-8)
 2026-11-24,cm_security_delivery,missing,https://nsearchives.nseindia.com/products/content/sec_bhavdata_full_24112026.csv,0,,,2026-11-24T08:51:18+05:30,HTTP 404 (text/html;charset=UTF-8)
+2026-11-22,cm_udiff,missing,https://nsearchives.nseindia.com/content/cm/BhavCopy_NSE_CM_0_0_0_20261122_F_0000.csv.zip,0,,,2026-11-25T05:08:03+05:30,HTTP 404 (text/html;charset=UTF-8)
+2026-11-22,fo_udiff,missing,https://nsearchives.nseindia.com/content/fo/BhavCopy_NSE_FO_0_0_0_20261122_F_0000.csv.zip,0,,,2026-11-25T05:08:04+05:30,HTTP 404 (text/html;charset=UTF-8)
+2026-11-24,cm_udiff,missing,https://nsearchives.nseindia.com/content/cm/BhavCopy_NSE_CM_0_0_0_20261124_F_0000.csv.zip,0,,,2026-11-25T05:08:05+05:30,HTTP 404 (text/html;charset=UTF-8)
+2026-11-24,fo_udiff,missing,https://nsearchives.nseindia.com/content/fo/BhavCopy_NSE_FO_0_0_0_20261124_F_0000.csv.zip,0,,,2026-11-25T05:08:06+05:30,HTTP 404 (text/html;charset=UTF-8)
+2026-11-24,cm_security_delivery,ok,https://nsearchives.nseindia.com/products/content/sec_bhavdata_full_24112026.csv,405464,2e0ccd57f1b58cfe02aef71cb80e9a9ef51e64f4e334a5ba1278a63a3010b82a,nse_data/raw/cm_security_delivery/20261124.csv,2026-11-25T05:08:07+05:30,CSV rows=3588; columns=15; member=20261124_cm_security_delivery.csv
+2026-11-25,cm_udiff,missing,https://nsearchives.nseindia.com/content/cm/BhavCopy_NSE_CM_0_0_0_20261125_F_0000.csv.zip,0,,,2026-11-25T05:08:08+05:30,HTTP 404 (text/html;charset=UTF-8)
+2026-11-25,fo_udiff,missing,https://nsearchives.nseindia.com/content/fo/BhavCopy_NSE_FO_0_0_0_20261125_F_0000.csv.zip,0,,,2026-11-25T05:08:09+05:30,HTTP 404 (text/html;charset=UTF-8)
+2026-11-25,cm_security_delivery,missing,https://nsearchives.nseindia.com/products/content/sec_bhavdata_full_25112026.csv,0,,,2026-11-25T05:08:11+05:30,HTTP 404 (text/html;charset=UTF-8)
