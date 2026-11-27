@@ -1,11 +1,11 @@
 {
-  "assessment_date": "2026-11-27T01:02:00",
-  "total_canonical_trading_dates": 163,
+  "assessment_date": "2026-11-27T22:56:35",
+  "total_canonical_trading_dates": 164,
   "start_date": "2026-04-01",
-  "end_date": "2026-11-26",
+  "end_date": "2026-11-27",
   "exchange_parity": {
-    "nse_days_available": 163,
-    "bse_days_available": 163,
+    "nse_days_available": 164,
+    "bse_days_available": 164,
     "date_parity_percentage": 100.0,
     "missing_exchange_dates": []
   },
@@ -33,14 +33,14 @@
     "status": "VERIFIED"
   },
   "summary_totals_cr": {
-    "market_turnover_cr": 59058110.0842,
-    "central_gov_stt_cr": 41445.2097,
-    "state_gov_stamp_duty_cr": 2711.5943,
-    "gst_revenue_cr": 1086.0895,
-    "total_government_tax_revenue_cr": 45242.8935,
-    "sebi_regulatory_fees_cr": 59.0575,
-    "total_statutory_revenue_cr": 45301.951,
-    "non_government_charges_cr": 5974.7706
+    "market_turnover_cr": 59356838.5258,
+    "central_gov_stt_cr": 41686.7836,
+    "state_gov_stamp_duty_cr": 2726.5683,
+    "gst_revenue_cr": 1093.0199,
+    "total_government_tax_revenue_cr": 45506.3718,
+    "sebi_regulatory_fees_cr": 59.3562,
+    "total_statutory_revenue_cr": 45565.728,
+    "non_government_charges_cr": 6012.9742
   },
   "confidence_level": "HIGH_CONFIDENCE_VERIFIED",
   "official_disclaimer": "Estimated statutory revenue calculated from official exchange BhavCopy, Gross Delivery, and Derivatives summaries using date-effective statutory tax rates. These are deterministic quantitative estimates and must not be construed as actual government Treasury receipts."

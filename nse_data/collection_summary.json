@@ -1,43 +1,43 @@
 {
-  "generated_at_ist": "2026-11-27T06:31:20+05:30",
+  "generated_at_ist": "2026-11-28T04:25:43+05:30",
   "date_range": {
-    "start": "2026-11-22",
-    "end": "2026-11-27"
+    "start": "2026-11-23",
+    "end": "2026-11-28"
   },
   "this_run": {
     "cm_udiff": {
-      "ok": 0,
-      "missing": 2,
+      "ok": 1,
+      "missing": 1,
       "blocked": 0,
       "error": 0,
       "skipped": 4
     },
     "fo_udiff": {
-      "ok": 0,
-      "missing": 2,
+      "ok": 1,
+      "missing": 1,
       "blocked": 0,
       "error": 0,
       "skipped": 4
     },
     "cm_security_delivery": {
-      "ok": 0,
+      "ok": 1,
       "missing": 1,
       "blocked": 0,
       "error": 0,
-      "skipped": 5
+      "skipped": 4
     }
   },
   "latest_historical_status": {
     "cm_udiff": {
-      "ok": 3,
-      "missing": 3,
+      "ok": 4,
+      "missing": 2,
       "blocked": 0,
       "error": 0,
       "not_recorded": 0
     },
     "fo_udiff": {
-      "ok": 3,
-      "missing": 3,
+      "ok": 4,
+      "missing": 2,
       "blocked": 0,
       "error": 0,
       "not_recorded": 0
